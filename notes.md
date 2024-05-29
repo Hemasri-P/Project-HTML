@@ -31,7 +31,9 @@ The war between Nescape and IE
 - String
 - Number
 - Boolean
-  Undefined
-  Null
-  Symbol
-  Object
+- Undefined
+- Null
+- Symbol
+- Object
+
+###
