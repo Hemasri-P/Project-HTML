@@ -19,4 +19,19 @@ The war between Nescape and IE
 ## References
 
 - "https://www.youtube.com/watch?v=CZ3wIuvmHeM"
--
+
+## INTRO TO JAVASCRIPT:
+
+- variable declaration : var = ""
+- To check data type : type(variable)
+  - ex: typeof("x")= string
+
+### Data types in js:
+
+- String
+- Number
+- Boolean
+  Undefined
+  Null
+  Symbol
+  Object
