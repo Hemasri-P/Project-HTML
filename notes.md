@@ -14,7 +14,7 @@ The war between Nescape and IE
    - Python
    - NodeJS
    - Java
-```
+
 
 ## References
 
@@ -32,8 +32,15 @@ The war between Nescape and IE
 - Number
 - Boolean
 - Undefined
-- Null
 - Symbol
 - Object
+
+### variable declarations :
+
+- let :reassign is possible but,
+- var :can be changed or redeclarable,reassign possible.
+- constant :can't be changed,reassign not possible
+
+```
 
 ###
