@@ -2,6 +2,7 @@
 
 ## Browser wars - I:
 
+```js
 The war between Nescape and IE
 
 ## 3 layer architecure
@@ -47,6 +48,7 @@ The war between Nescape and IE
 //undefined means = value
 
 //not define means= error
+```
 
 ### TypeCasting
 
@@ -108,7 +110,7 @@ console.log(x1-x2); ==> -2
 
 ### coby value
 
-```
+```js
 var q1=[100,200];
 var q3=q1;
 =>not defined
@@ -116,7 +118,7 @@ var q3=q1;
 
 ### spreading operator(copy by value)
 
-```
+```js
 var q1=[100,200];
 var q3=[...q1];
 console.log(q3);
@@ -133,7 +135,7 @@ output: t3->[90,80,400,500]
 
 ### Loops
 
-```
+```js
 //More control
 const marks=[80,90,100];
 for (let  i=0;i<marks.length;i++)
@@ -177,5 +179,63 @@ let total=0;
     total+=item.price*item.quality;
    }
    console.log("The cart total is:", total);
+
+```
+
+## Examples
+
+```js
+const books = [
+  { title: "Infinite Jest", rating: 4.5, genre: "Fiction" },
+  { title: "A Brief History of Time", rating: 4.8, genre: "Science" },
+  { title: "The Catcher in the Rye", rating: 3.9, genre: "Fiction" },
+  { title: "Sapiens", rating: 4.9, genre: "History" },
+  { title: "Clean Code", rating: 4.7, genre: "Technology" },
+];
+
+for (let i = 0; i <= books.length; i++) {
+  if (books[i].rating > 4.7) console.log(books[i].title);
+}
+
+// ANOTHER
+
+for (let book of books) {
+  if (book.rating >= 4.7) {
+    console.log(book.title);
+  }
+}
+
+//ANOTHER
+let highRatedBooks = [];
+{
+  //camel case
+  if (book.rating >= 4.7) {
+    highRatedBooks.pudh(book.title);
+  }
+}
+```
+
+```js
+// Ex 3: If employee's grades 80 or above promote them
+const employes = [
+  { id: 1, name: "Alice", grade: 78 },
+  { id: 2, name: "Bob", grade: 85 },
+  { id: 3, name: "Charlie", grade: 92 },
+  { id: 4, name: "David", grade: 88 },
+  { id: 5, name: "Eva", grade: 76 },
+];
+
+var j = [];
+for (let i = 0; i < employes.length; i++) {
+  if (employes[i].grade > 80)
+    j.push({ id: employes[i].id, status: "promoted" });
+}
+console.log(j);
+
+// This should output:
+// [{ id: 2, status: 'Promoted' }, { id: 3, status: 'Promoted' }, { id: 4, status: 'Promoted' }]
+```
+
+```js
 
 ```
