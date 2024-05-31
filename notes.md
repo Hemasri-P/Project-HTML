@@ -301,7 +301,7 @@ Supports multiline string
  improves quality and the functionality is same as before
 ```
 
-### Array Destructing(unpacking)
+### Array Destructuring(unpacking done using index value)
 
 ```js
 const[t1,t2]=[100,200];
@@ -327,8 +327,51 @@ const[t1,t2,t3=30]=[100,20,undefined];
 console.log(t1,t2,t3);
 output: 100 20 30
 
-const[,t1,t2,t3=30]=[100,200,null]; syntax called as Holes
+const[,t1,t2,t3=30]=[100,200,null]; syntax called as Holes(to skip values)
 console.log(t1,t2,t3);
 VM64:2 200 null 30
+
+```
+
+### Object Destructuring
+
+```js
+unpacking things using keys
+as like array desturing ,it will uses objects.
+```
+
+### Binary operators
+
+```js
+arithmetic - +,-,*,/
+Logical- &&,||
+realational - >,<,>=,<=,==,===
+```
+
+### Ternary
+
+```js
+4 > 3 ? "Awesome" : "cool";
+```
+
+### Unary operator
+
+```js
+++, --, !
+```
+
+### Truthy vs Falsy ; if value converts into "true" then Truthy ,Vise versa
+
+```js
+let x="cool";
+if (x)
+{
+  console.log("Hey");
+  }
+  else
+  {
+    console.log("Nope');
+  }
+    output : Hey
 
 ```
