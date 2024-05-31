@@ -20,7 +20,6 @@ const cart = [
    }
    console.log("The cart total is:", total);
 
-   
    const books = [
     { title: "Infinite Jest", rating: 4.5, genre: "Fiction" },
     { title: "A Brief History of Time", rating: 4.8, genre: "Science" },
@@ -28,7 +27,7 @@ const cart = [
     { title: "Sapiens", rating: 4.9, genre: "History" },
     { title: "Clean Code", rating: 4.7, genre: "Technology" },
   ]; 
-    
+    //greater than  4.7 rating 
   
   for(let i=0;i<=books.length;i++)
     {
