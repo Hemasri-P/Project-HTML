@@ -294,3 +294,41 @@ Object.key() and Object.value()
 interpolation - substitution
 Supports multiline string
 ```
+
+### refactoring -
+
+```js
+ improves quality and the functionality is same as before
+```
+
+### Array Destructing(unpacking)
+
+```js
+const[t1,t2]=[100,200];
+console.log(t1,t2,t3);
+output= t3 will be undefined.
+
+
+const[t1,t2,t3=30]=[100,20];
+console.log(t1,t2,t3);
+output: 100,20,30
+***default value is taken only t3 is undefined***
+
+const[t1,t2,t3=30]=[100,20,500];
+console.log(t1,t2,t3);
+output:100,20,500
+
+
+const[t1,t2,t3=30]=[100,20,null];
+console.log(t1,t2,t3);
+output:100,20,null
+
+const[t1,t2,t3=30]=[100,20,undefined];
+console.log(t1,t2,t3);
+output: 100 20 30
+
+const[,t1,t2,t3=30]=[100,200,null]; syntax called as Holes
+console.log(t1,t2,t3);
+VM64:2 200 null 30
+
+```
