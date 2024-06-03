@@ -419,9 +419,151 @@ console.log(processNames(namesArray));
 
 ```js
 Planning : done by CEO
-Analysis :
+Analysis :types:technical,business analysis
 Design :Auto layout +variance
 Implementation: Done by Developers
 Testing and integration:
 Maintenance : Done by support team
+```
+
+### Stakeholder:
+
+```js
+A stakeholder is a person, group or organization with a vested interest, or stake, in the decision-making and activities of a business, organization or project.
+```
+
+### 6 phases of SDLC
+
+```js
+1.Analysis: product owner,project manager,business analyst,CTO
+2.Design:System architect,UI/UX designer
+3.Development:Front and Back end Developers
+4.Testing:Solution Architect,QA engineer,Tester,DevOps
+5.Deployment:Data Adminstrator,DevOps
+6.Maintenance: User,testers,Support Managers
+```
+
+### METHODOLOGY
+
+![METHODOLOGY](image.png)
+
+### scrum (Scrum is an empirical process, where decisions are based on observation, experience and experimentation.)
+
+![alt text](image-1.png)
+
+```js
+1 sprint = 2weeks
+sprint palnning 1 hour.
+standup meeting- 10-15 minutes.(what did yesterday ,and what has to to today)
+```
+
+### canban Board
+
+![alt text](image-2.png)
+
+### Spill over( work was not completed in 1 sprint,it will continue or add in another sprint)
+
+## Coding standards
+
+Are meant have uniformity through outnyour code base.
+
+### Code quality
+
+### Dry
+
+### variables name (understandable / descriptive)
+
+```js
+let a = 50; //❌
+let age = 50; // 💯
+```
+
+```js
+camelcase:
+let student_name="hemasri"; //❌
+let studentName="hemasri"; //💯
+
+```
+
+```js
+choose let over var ,const over let
+let panCard= "BNLPH456"; // ❌
+let PAN_CARD= "BNLPH456"; //💯
+```
+
+### Write your const case
+
+```js
+const piValue = "3.24"; //❌
+const PI_VALUE = "3.14"; //💯
+```
+
+### Errors ( for Variable name)
+
+Reserved keywords (if,for)
+
+```js
+let if= "hemasri";//❌
+```
+
+Cannot start with numbers
+
+```js
+let2cool = "hemasri"; //❌
+```
+
+cannot have sepecial characters ($,@,#,!)(except for'\_')
+
+```js
+let abc$123 = "hemasri"; //❌
+let abc_123 = "hemasri"; // 💯
+```
+
+## Documentation
+
+- single line comment
+
+```js
+//
+```
+
+- Multiple line comment
+
+```js
+/**
+ * This is cool
+ * function
+ *
+ *
+```
+
+### Write a function
+
+/\*\*
+
+- Multiplies two numbers.
+- @param {number} x - The first number.
+- @param {number} y - The second number.
+- @returns {number} The product of x and y.
+- @example
+- multiply(2, 3); // returns 6
+  _/
+  function multiply(x, y) {
+  return x _ y;
+  }
+
+// Write a function to make it uppercase
+/\*\*
+
+- converts the text into uppercase
+- @param {string} text
+- @return {string} Uppercase left
+- convert ToUppercase("hello"); // returns "HELLO"
+  \*/
+
+```js
+funtion convertToUppercase(text)
+{
+return text.toUppercase();
+}
 ```
