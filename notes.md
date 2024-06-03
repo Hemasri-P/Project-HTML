@@ -19,7 +19,9 @@ The war between Nescape and IE
 ## References
 
 - "https://www.youtube.com/watch?v=CZ3wIuvmHeM"
+```
 
+```js
 ## INTRO TO JAVASCRIPT:
 
 - variable declaration : var = ""
@@ -43,7 +45,8 @@ The war between Nescape and IE
 
 ### Scope
 
-- life of variable: block of code in a program,unless the varaible is used it will be there in memory,next deleted/no longer there in memory.
+- life of variable:
+ block of code in a program,unless the varaible is used it will be there in memory,next deleted/no longer there in memory.
 
 //undefined means = value
 
@@ -57,13 +60,13 @@ The war between Nescape and IE
 
  ex : var x1=3;
 var x2="4";
-console.log(x1+x2); ==>"35"
+console.log(x1+x2); ==>35
 console.log(x1-x2); ==> -2
 
   explicit coercion: ex:
    var x1=3;
    var x2="5";
-   console.log(x1+parseInt(x2));
+   console.log(x1+parseInt(x2)); =>8
    console.log(x1+ +x2); ==>
 
    Examples
@@ -373,5 +376,52 @@ if (x)
     console.log("Nope');
   }
     output : Hey
+```
 
+### String inbuilt methods
+
+```js
+"Hemasri".toUpeerCase()   => 'HEMASRI'
+"Hemasri".toLowerCase()    =>'hemasri'
+"this is a girl".split()   =>['this','is','a','girl']
+['this','is','a','girl'].join("|") =>'this|is|a|girl'
+"hemasri".split("")   =>['h','e','m','e','s','r','i']
+
+```
+
+### EXAMPLE
+
+```js
+function transformSentence(sentence){
+return sentence.toUpperCase().split(" ").reverse().join(" ");
+}
+let sentence = "Hello world from JavaScript";
+let transformed = transformSentence(sentence);
+console.log(transformed);
+ output => JAVASCRIPT FROM WORLD HELLO
+
+
+function processNames(names) {
+let result = [];
+for (let i = 0; i < names.length; i++) {
+let upperCaseName = names[i].toUpperCase();
+let nameParts = upperCaseName.split(" ");
+let joinedName = nameParts.join("_");
+result.push(joinedName);
+}
+return result;
+}
+const namesArray = ["john doe", "jane smith", "alice jones"];
+console.log(processNames(namesArray));
+```
+
+### Software Development life cycle:
+
+```js
+Planning : done by CEO
+Analysis :
+Design :Auto layout +variance
+Implementation: Done by Developers
+Testing and integration:
+Maintenance : Done by support team
 ```
