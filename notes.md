@@ -541,7 +541,7 @@ let abc_123 = "hemasri"; // 💯
 
 /\*\*
 
-- Multiplies two numbers.
+- Multiplies two numbers
 - @param {number} x - The first number.
 - @param {number} y - The second number.
 - @returns {number} The product of x and y.
@@ -603,7 +603,8 @@ return text.toUppercase();
   - yank means copy - y
   - i"- chnage /delete/yank inside a pair of quotes
   - (wq - used to quit vim terminal
-    ![alt text](image-4.png)
+
+![alt text](image-4.png)
 
 ## Git vs GitHub
 
