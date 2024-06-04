@@ -572,8 +572,38 @@ return text.toUppercase();
 - 1 st create an empty folder
 - open folder, create a file and open in vs code
 - open terminal -
-  git init ,
   ![alt text](image-3.png)
+  - git init - ome time starting of project
+  - git add - adding all the files to staging
+  - git reset : to delete/ discard changes
+  - git checkout - . : returns to previous commit
+  - git switch - return to the master( starting)
+  - git status - shows the ststus of the file like modified,staged
+  - git cm "mistake name"
+  - git log -1 ; to check recent 1 commit
+  - git commit
+  - git add .
+  - git log --author
+  - git revert- used to remove,or add changes,vs
+  - w = write / save
+  - q = quit
+  - vim file name- vim terminal opens
+  - j - down
+  - k - up
+  - n- backward
+  - N- forward
+  - l - for right
+  - h - for left
+  - w - word forward movement
+  - b - backward
+  - dw = delete a word
+  - u = undo a word
+  - d2w - delete 2 words
+  - verb + Number + Movement =
+  - yank means copy - y
+  - i"- chnage /delete/yank inside a pair of quotes
+  - (wq - used to quit vim terminal
+    ![alt text](image-4.png)
 
 ## Git vs GitHub
 
@@ -583,6 +613,7 @@ gitHub- service,used to store  files.
 staging area : staging area gives you space to prepare (stage) the changes that will be reflected on the next commit.
 commit stage:
 - commit
-small multiple commits
-load works
+- small multiple commits
+- load works
+- commit msg should be precise
 ```
