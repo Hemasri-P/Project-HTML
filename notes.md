@@ -457,7 +457,7 @@ sprint palnning 1 hour.
 standup meeting- 10-15 minutes.(what did yesterday ,and what has to to today)
 ```
 
-### canban Board
+### Canban Board
 
 ![alt text](image-2.png)
 
@@ -467,9 +467,9 @@ standup meeting- 10-15 minutes.(what did yesterday ,and what has to to today)
 
 Are meant have uniformity through outnyour code base.
 
-### Code quality
+### Code quality (checked in Review by Reviewer)
 
-### Dry
+### Dry (Don't Repeat your self )
 
 ### variables name (understandable / descriptive)
 
@@ -567,3 +567,5 @@ funtion convertToUppercase(text)
 return text.toUppercase();
 }
 ```
+
+###
