@@ -534,7 +534,7 @@ let abc_123 = "hemasri"; // 💯
  * This is cool
  * function
  *
- *
+ */
 ```
 
 ### Write a function
@@ -551,15 +551,14 @@ let abc_123 = "hemasri"; // 💯
   function multiply(x, y) {
   return x _ y;
   }
-
-// Write a function to make it uppercase
-/\*\*
+  \*/
+  // Write a function to make it uppercase
+  \*\*
 
 - converts the text into uppercase
 - @param {string} text
 - @return {string} Uppercase left
-- convert ToUppercase("hello"); // returns "HELLO"
-  \*/
+- convert ToUppercase("hello"); // returns "HELLO" \*
 
 ```js
 funtion convertToUppercase(text)
@@ -568,4 +567,22 @@ return text.toUppercase();
 }
 ```
 
-###
+### GIT INTRO ( "Linus Torvalds")
+
+- 1 st create an empty folder
+- open folder, create a file and open in vs code
+- open terminal -
+  git init ,
+  ![alt text](image-3.png)
+
+## Git vs GitHub
+
+```js
+git - software ,use without internet to do Some work
+gitHub- service,used to store  files.
+staging area : staging area gives you space to prepare (stage) the changes that will be reflected on the next commit.
+commit stage:
+- commit
+small multiple commits
+load works
+```
