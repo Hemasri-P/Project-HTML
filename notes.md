@@ -569,6 +569,7 @@ return text.toUppercase();
 
 ### GIT INTRO ( "Linus Torvalds")
 
+```js
 - 1 st create an empty folder
 - open folder, create a file and open in vs code
 - open terminal -
@@ -606,6 +607,7 @@ return text.toUppercase();
   - git behind - extra commits in main branch
   - git a head-prsent commits added to main.
   - git pull = updated online to offline.
+    - Better command git pull --rebase origin dev -> dev branch
   - git push = updated to online.
 - git squash - hides code ( can't push to online )
   - git squash apply - recovers / retrives hided code
@@ -628,17 +630,44 @@ return text.toUppercase();
 ### staging version
 
 ![alt text](image-7.png)
+```
 
 ## Git vs GitHub
 
-```js
 git - software , version control system ,use without internet to do Some work.Distributed system ( Backup possible).
 used for colloborative work.
-gitHub- service,used to store  files.
+gitHub- service,used to store files.
 staging area : staging area gives you space to prepare (stage) the changes that will be reflected on the next commit.
 commit stage:
+
 - commit until code work
 - small multiple commits
 - load works
 - commit msg should be precise
-```
+
+### Terminology
+
+- Configuration management : configuration management is an IT management process that tracks individual configuration items of an IT system( code)
+
+  - CI : configuration item : Git Files
+  - Audit : by doing frequent commits -> signature
+    - Git blame : used to check the who did what changes by providing names of that assignee.
+    - Git difference
+  - Baseline - commits , Tags
+  - Accounting - git log , git blame - who did it,when they did it, what they did.
+  - Change Management - maintained using branches and Pull requests.
+    implement strategies for effecting and controlling change and helping people to adapt to change.
+
+  Advantages :
+
+  - Traceability - who?, why?
+  - maintain code quality and have consistency
+  - Reduces risks , avoid errors - because there is a backup
+  - smooth process
+
+- Release management : the process of planning, designing, scheduling, testing, deploying, and controlling software releases.
+  - Planning : to implement we have branching strategies
+  - Governance : Access level for each branch like authority
+  - Scheduling : Through Sprints in agile
+  - Automation : CI / CD , no human error
+  - contingency : Backup plan , rollback old version
