@@ -573,21 +573,20 @@ return text.toUppercase();
 - open folder, create a file and open in vs code
 - open terminal -
   ![alt text](image-3.png)
-  - git init - ome time starting of project
-  - git add - adding all the files to staging
+  - git init - one time starting of project
+  - git add . - adding all the changes to staging
   - git reset : to delete/ discard changes
   - git checkout - . : returns to previous commit
   - git switch - return to the master( starting)
   - git status - shows the ststus of the file like modified,staged
   - git cm "mistake name"
-  - git log -1 ; to check recent 1 commit
+  - git log -1 : to check recent one commit
   - git commit
-  - git add .
   - git log --author
   - git revert- used to remove,or add changes,vs
   - w = write / save
   - q = quit
-  - vim file name- vim terminal opens
+- vim file name- vim terminal opens
   - j - down
   - k - up
   - n- backward
@@ -601,19 +600,44 @@ return text.toUppercase();
   - d2w - delete 2 words
   - verb + Number + Movement =
   - yank means copy - y
-  - i"- chnage /delete/yank inside a pair of quotes
-  - (wq - used to quit vim terminal
+  - i"- change /delete/yank inside a pair of quotes
+  - : , wq - used to quit vim terminal
+  - git branch --all = to show all branches
+  - git behind - extra commits in main branch
+  - git a head-prsent commits added to main.
+  - git pull = updated online to offline.
+  - git push = updated to online.
+- git squash - hides code ( can't push to online )
+  - git squash apply - recovers / retrives hided code
+- rebase - combines all commits together
+  - keeping the history in straight line.
+  - we can eaily identify the bug by using binary search.[ command : git bisect]
+  - rebase won't perform on master,staging,dev
+    it only applies on features.
+  - git rebase -i HEAD~4
+- merge types : fast forward , merge commit
+
+  - git revert- used to remove,or add changes,vs
+
+  ![alt text](image-5.png)
 
 ![alt text](image-4.png)
+
+![alt text](image-6.png)
+
+### staging version
+
+![alt text](image-7.png)
 
 ## Git vs GitHub
 
 ```js
-git - software ,use without internet to do Some work
+git - software , version control system ,use without internet to do Some work.Distributed system ( Backup possible).
+used for colloborative work.
 gitHub- service,used to store  files.
 staging area : staging area gives you space to prepare (stage) the changes that will be reflected on the next commit.
 commit stage:
-- commit
+- commit until code work
 - small multiple commits
 - load works
 - commit msg should be precise
