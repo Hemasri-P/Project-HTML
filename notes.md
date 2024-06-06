@@ -669,5 +669,14 @@ commit stage:
   - Planning : to implement we have branching strategies
   - Governance : Access level for each branch like authority
   - Scheduling : Through Sprints in agile
-  - Automation : CI / CD , no human error
+  - Automation : CI / CD ->continous integration & deployment , no human error
   - contingency : Backup plan , rollback old version
+
+### SAAS : All web apps
+
+### PAAS : Netlify , Rendor , Railway , Vercel . It provides environment, we have to use it to develop and used by Freelancers, developers.
+
+### IAAS : AWS , Microsoft Azure
+
+![alt text](image-9.png)
+![alt text](image-10.png)
