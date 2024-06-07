@@ -569,7 +569,6 @@ return text.toUppercase();
 
 ### GIT INTRO ( "Linus Torvalds")
 
-```js
 - 1 st create an empty folder
 - open folder, create a file and open in vs code
 - open terminal -
@@ -630,7 +629,6 @@ return text.toUppercase();
 ### staging version
 
 ![alt text](image-7.png)
-```
 
 ## Git vs GitHub
 
@@ -649,7 +647,7 @@ commit stage:
 
 - Configuration management : configuration management is an IT management process that tracks individual configuration items of an IT system( code)
 
-  - CI : configuration item : Git Files
+  - CI : configuration item : Git Files ->source code
   - Audit : by doing frequent commits -> signature
     - Git blame : used to check the who did what changes by providing names of that assignee.
     - Git difference
@@ -663,13 +661,13 @@ commit stage:
   - Traceability - who?, why?
   - maintain code quality and have consistency
   - Reduces risks , avoid errors - because there is a backup
-  - smooth process
+  - smooth process -> Change management.
 
 - Release management : the process of planning, designing, scheduling, testing, deploying, and controlling software releases.
   - Planning : to implement we have branching strategies
   - Governance : Access level for each branch like authority
   - Scheduling : Through Sprints in agile
-  - Automation : CI / CD ->continous integration & deployment , no human error
+  - Automation : CI / CD -> continous integration & deployment , to reduce human error
   - contingency : Backup plan , rollback old version
 
 ### SAAS : All web apps
@@ -694,3 +692,5 @@ Types:
 
 ![alt text](image-14.png)
 ![alt text](image-15.png)
+![alt text](image-16.png)
+![alt text](image-17.png)
