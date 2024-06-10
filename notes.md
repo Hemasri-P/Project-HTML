@@ -694,3 +694,51 @@ Types:
 ![alt text](image-15.png)
 ![alt text](image-16.png)
 ![alt text](image-17.png)
+
+### Database
+
+- collection of data in a systematic format.
+- cloud:Renting data/pc
+  ![alt text](image-18.png)-> only provide service, we can install - any softwares in it.
+  ![alt text](image-20.png)-> providers
+  ![alt text](image-21.png)
+- if we are buying cloud:
+  ![alt text](image-22.png)
+- if we are renting:
+
+- Disaster management : if there is any disaster happens, they can backup.
+- Scaling : adding more customers by providing more products
+  1.vertical scaling[ making pc powerful], 2.Horizontal scaling [adding more computers]
+  ![alt text](image-25.png)
+  3 .Auto scaling[Pay as per use]
+  ![alt text](image-26.png)
+  DDOS :load increases to site ,Attackimg from multiple users
+  ![alt text](image-27.png)
+  ![alt text](image-28.png)
+- PC : ![alt text](image-23.png)
+- Operating system :
+
+Most used os -> Linux
+
+- advantages of linux : 1. Free of cost 2. Open source: Boat example 3.secure ,4.small footprint : Alpine[ moste used linux] it takes lesser money ,5.Automation ![alt text](image-24.png)
+
+### why we need database ?
+
+frequently asked data was stored in RAM ,
+
+- Features
+
+1. Database -Frequently asked will have it in the RAM
+2. Qyerying becomes easier
+3. CRUD - easy
+4. Backups are inbuilt
+5. Undo- Easily(Time limit)
+6. Performance
+
+### SQL
+
+Example : PLSQL , MySql , PostgreSQL , amazonRDS
+
+### NoSQL
+
+Examples : MongoDB , couchDB , redis , cassandra [ Neflix used this DB] , DynamoDB , neo4j

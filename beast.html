@@ -7,7 +7,7 @@
     <style>
       .photo {
         height: 345px;
-        width: 485;
+        width: 300px;
         border-radius: 50px;
       }
       body {
@@ -15,23 +15,49 @@
         display: grid;
         place-content: center;
         background-color: black;
+        background-image: linear-gradient(
+          to left top,
+          #070103,
+          #382325,
+          #6a423b,
+          #98674b,
+          #bf9359
+        );
       }
       div {
         color: azure;
-        height: 300px;
-        width: 250px;
         text-align: center;
+        padding: 0px 8px;
       }
-      p {
+      p,
+      h7 {
         font-family: Plus Jakarta Sans;
         color: #cfb4b3;
         font-size: 15px;
+      }
+      .movie-name {
+        font-family: Inter, sans-serif;
+        text-align: center;
+      }
+      .movie-spec {
+        font-size: 13px;
+        color: #a78584;
+        text-align: center;
+        font-family: Plus Jakarta Sans;
+      }
+
+      .movie-container {
+        text-align: center;
+        width: 300px;
+      }
+      .dot {
+        color: white;
       }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Reddit+Mono:wght@200..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -40,11 +66,14 @@
       <img
         class="photo"
         src="https://i.pinimg.com/originals/d0/b9/ec/d0b9ec3a33c3b8627f9b1c6958b8fb3d.jpg"
-        alt=""
+        alt="Beast movie poster"
       />
-      <h1>Beast</h1>
-      <h6>2022.Action/Dark comedy.2h 38m</h6>
-      <p>
+      <h1 class="movie-name">Beast</h1>
+      <h7 class="=movie-spec"
+        >2022<span class="dot">.</span> Action/Dark comedy
+        <span class="dot">.</span> 2h 38m</h7
+      >
+      <p class="movie-container">
         Beast is an upcoming Indian Tamil-language action thriller film written
         and directed by Nelson and produced by Sun Pictures. The film stars
         Vijay and Pooja Hegde, while Selvaraghavan, Yogi Babu and Redin Kingsley
