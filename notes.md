@@ -720,7 +720,9 @@ Types:
 
 Most used os -> Linux
 
-- advantages of linux : 1. Free of cost 2. Open source: Boat example 3.secure ,4.small footprint : Alpine[ moste used linux] it takes lesser money ,5.Automation ![alt text](image-24.png)
+- advantages of linux : 1. Free of cost 2. Open source: Boat example 3.secure ,4.small footprint : Alpine-256MB[ moste used linux] it takes lesser money ,5.Automation[managing anything from terminal]
+
+![DISTRIBUTIONS](image-24.png)
 
 ### why we need database ?
 
@@ -739,6 +741,36 @@ frequently asked data was stored in RAM ,
 
 Example : PLSQL , MySql , PostgreSQL , amazonRDS
 
-### NoSQL
+### NoSQL Stored in Files
 
 Examples : MongoDB , couchDB , redis , cassandra [ Neflix used this DB] , DynamoDB , neo4j
+
+### Normalization : to reduce redundency , anamoly, inconsistency
+
+- used for safety of database [ to avoid anamoly]
+  ![alt text](image-35.png)
+  ![[alt text]](image-36.png)
+  ![alt text](image-37.png)
+  ![alt text](image-38.png)
+  ![alt text](image-40.png)
+  ![alt text](image-39.png)
+
+### joins
+
+![alt text](image-41.png)
+
+### INNER JOIN - EXAMPLE
+
+![alt text](image-42.png)
+
+### LEFT JOIN - EXAMPLE
+
+![alt text](image-43.png)
+
+### RIGHT JOIN -EXAMPLE
+
+![alt text](image-44.png)
+
+### FULL JOIN- EXAMPLE
+
+![alt text](image-45.png)
