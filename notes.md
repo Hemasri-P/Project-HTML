@@ -737,7 +737,7 @@ frequently asked data was stored in RAM ,
 5. Undo- Easily(Time limit)
 6. Performance
 
-### SQL
+### SQL : stored in
 
 Example : PLSQL , MySql , PostgreSQL , amazonRDS
 
@@ -755,7 +755,7 @@ Examples : MongoDB , couchDB , redis , cassandra [ Neflix used this DB] , Dynamo
   ![alt text](image-40.png)
   ![alt text](image-39.png)
 
-### joins
+### joins : for safety , to divide and slove problem
 
 ![alt text](image-41.png)
 
@@ -774,3 +774,7 @@ Examples : MongoDB , couchDB , redis , cassandra [ Neflix used this DB] , Dynamo
 ### FULL JOIN- EXAMPLE
 
 ![alt text](image-45.png)
+
+### Aggregation : to summarize things
+
+### group by [Every]
