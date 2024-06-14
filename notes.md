@@ -777,4 +777,99 @@ Examples : MongoDB , couchDB , redis , cassandra [ Neflix used this DB] , Dynamo
 
 ### Aggregation : to summarize things
 
-### group by [Every]
+### Group By [Every KEYWORD ]
+
+### DATA TYPES
+
+- Integer - for numbers
+- Boolean - for 0 , 1
+- Float, double , real - can store precise numerical data like fractional
+- CHARACTER(num_chars) , VARCHAR(num_chars) - limited text or sentence , TEXT - Text based datatypes
+- DATE , DATETIME - for dates , times
+- BLOB [Binary Large Object] - Path of data / file stored in filesystem.
+
+### CONSTRAINTS : Validating whether a data is Correct or not
+
+- Primary Key - unique , not null , must contain 1 pk in a table
+- Autoincrement - value is automatically filled in database.
+- Unique -
+- Not Null - not empty
+- CHECK(Expression) -
+- FOREIGN KEY - PK in another table
+- Foreign key constarint - when we want to insert data in fk , it will checks the data in pk and returns the error.
+
+  ![alt text](image-58.png)
+  ![alt text](image-59.png)
+
+### INT TYPES
+
+- Int : -2B , 2Billions
+- smallint : -32k , 32k
+- Bigint : 9*10^8 , 9*10^8
+
+### String Types - Stored in unique codes.
+
+- Varchar : Letter is stored as 2 character
+- n varchar : letter is stored as 1 characters
+- nvarchar MAX - used for large strings.
+
+### Date
+
+- date time
+- date
+- time
+
+### Decimal types
+
+- Decimal (Exact) : Exact but performace was looses
+- Float (Approx) : Performance is good
+
+### Boolean types : stored in Bit
+
+- 0 , 1 : True , False
+
+### Functions
+
+- Aggregate : sum,count.max,min,
+
+- String Functions
+
+```sql
+-- 1.Len
+select Len('hemasri') as NameLength
+
+-- 2. Left
+select Left('hemasri', 02)
+
+--3. Rightt
+select Right('hemasri', 1)
+
+-- 4.Lower
+select Lower('HEMASRI')
+
+--5. Upper
+select Upper('hemasri')
+
+-- 6.substring : from 2 and upto 3 letters
+select substring('hemasri',2,3)
+
+--7.Ltrim
+select Ltrim('hemasri','h') as NameLength
+
+--8.Rtrim
+select Rtrim('hemasri','sri')
+
+--9.CharIndex
+select CharIndex('hemasri','r')
+
+-- 10.Replace
+select Replace(5,'hemasri','kavya')
+
+-- 11 Concat
+select Concat('hemasri','54')
+```
+
+- File format
+  ![alt text](image-61.png)
+- Mathematical functions
+  ![alt text](image-60.png)
