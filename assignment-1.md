@@ -224,10 +224,13 @@ group  by Accounts.customer_id;
 
 ```sql
 11. Write a SQL query to calculate the average daily balance for each account over a specified period.
-
-
-
+Select Accounts.account_id, sum(balance)/7 as daily_avg from Accounts
+join Transactions  on Accounts.account_id = Transactions.account_id
+where transaction_date > getdate() - 7
+group by Accounts.account_id;
 ```
+
+![alt text](image-80.png)
 
 ```sql
 12. Identify accounts with the highest number of transactions ordered by descending order.
