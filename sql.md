@@ -616,6 +616,8 @@ group  by Accounts.customer_id;
 
 ```
 
+![alt text](image-79.png)
+
 ```sql
 10. Write a SQL query to find the average account balance for all customers.
 Select Accounts.customer_id , avg(balance) as AverageBalance from Accounts
