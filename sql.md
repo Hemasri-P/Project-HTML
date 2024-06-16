@@ -540,3 +540,130 @@ select * from employees a
 
       ```
 ````
+
+1. Insert at least 10 sample records into each of the following tables: `Customers`, `Accounts`, `Transactions`, `InterestRates`, `Branches`.
+   ![alt text](image-62.png)
+   ![alt text](image-63.png)
+   ![alt text](image-64.png)
+   ![alt text](image-65.png)
+   ![alt text](image-66.png)
+
+```sql
+2. Write a SQL query to retrieve the name, account type, and email of all customers.
+Select customer_id, first_name, last_name,CONCAT(first_name , last_name)  as Name from Customers_1
+ inner join Accounts on Accounts.customer_id=Customers_1.customer_id;
+```
+
+![alt text](image-67.png)
+
+```sql
+3. Write a SQL query to list all transactions along with the corresponding customer.
+Select T.transaction_id,CONCAT(C.first_name, C.last_name)  as Name from CUSTOMERS C
+JOIN ACCOUNTS A ON C.Customer_id = A.Customer_id
+JOIN Transactions T ON A.account_id = T.account_id
+order by Name;
+```
+
+![alt text](image-71.png)
+
+```sql
+4. Write a SQL query to increase the balance of a specific account by a certain amount.
+Update Accounts set balance = balance + 5000.00
+where account_id=4;
+Select account_id, balance from Accounts where account_id=4;
+```
+
+![alt text](image-72.png)
+
+```sql
+5. Write a SQL query to combine the first and last names of customers as `full_name`.
+Select customer_id, first_name, last_name,CONCAT(first_name , last_name)  as full_name from Customers_1;
+```
+
+![alt text](image-68.png)
+
+```sql
+6. Write a SQL query to remove accounts with a balance of zero where the account type is savings.
+Select account_type , Balance from Accounts
+where account_type='savings' AND balance='0';
+```
+
+![alt text](image-69.png)
+
+```sql
+7. Write a SQL query to find customers living in a specific city.
+ UPDATE Customers_1 SET address = '456 Oak Ave'
+ where customer_id = 5;
+   Select * from Customers_1;
+    Select Customer_id ,CONCAT(first_name , last_name)  as full_name , address from Customers_1
+	where address='456 Oak Ave';
+```
+
+![alt text](image-70.png)
+
+```sql
+8. Write a SQL query to get the account balance for a specific account.
+Select * from Accounts where account_id=4;
+```
+
+![alt text](image-73.png)
+
+```sql
+9. Write a SQL query to calculate the interest accrued on savings accounts based on a given interest rate.
+Select Accounts.customer_id , avg( balance) as average  from Accounts
+inner join  Customers on Customers.customer_id=Accounts.customer_id
+group  by Accounts.customer_id;
+
+```
+
+```sql
+10. Write a SQL query to find the average account balance for all customers.
+Select Accounts.customer_id , avg(balance) as AverageBalance from Accounts
+inner join  Customers on Customers.customer_id=Accounts.customer_id
+group  by Accounts.customer_id;
+```
+
+![alt text](image-74.png)
+
+```sql
+11. Write a SQL query to calculate the average daily balance for each account over a specified period.
+
+
+
+```
+
+```sql
+12. Identify accounts with the highest number of transactions ordered by descending order.
+
+Select account_id,count(account_id) as count from Transactions group by account_id order by count(account_id) desc;
+```
+
+![alt text](image-75.png)
+
+```sql
+13. List customers with high aggregate account balances, along with their account types.
+Select Customers.Customer_id ,CONCAT(Customers.first_name,Customers.last_name) AS FULLNAME,account_id ,account_type ,Sum(balance) as Balance from Accounts
+inner join Customers on customers.customer_id=Accounts.customer_id
+group by Customers.Customer_id,CONCAT(Customers.first_name,Customers.last_name), account_id,account_type order by SUM(balance) desc;
+```
+
+![alt text](image-76.png)
+
+```sql
+14. Identify and list duplicate transactions based on transaction amount, date, and account.
+SELECT AMOUNT, transaction_date,Account_id,COUNT(*) FROM Transactions
+GROUP BY AMOUNT, transaction_date,Account_id HAVING COUNT(*)>1;
+
+```
+
+![alt text](image-78.png)
+
+```sql
+15. Calculate the total balance for each account type, including a subquery within the SELECT clause.
+SELECT account_type,(SELECT SUM(balance) FROM Accounts
+                   WHERE account_type = a.account_type) AS total_balance
+                   FROM (SELECT DISTINCT account_type FROM Accounts) AS a;
+
+```
+
+![alt text](image-77.png)
