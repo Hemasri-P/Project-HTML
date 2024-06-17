@@ -815,9 +815,9 @@ Examples : MongoDB , couchDB , redis , cassandra [ Neflix used this DB] , Dynamo
 
 ### Date
 
-- date time
-- date
-- time
+- Date time
+- Date
+- Time
 
 ### Decimal types
 
@@ -873,3 +873,25 @@ select Concat('hemasri','54')
   ![alt text](image-61.png)
 - Mathematical functions
   ![alt text](image-60.png)
+
+### set operations
+
+- All :
+- any :
+- Exsist : checks for data , and gives boolean results.
+- Except / INTERSECT :
+  EXCEPT returns distinct rows from the left input query that aren't output by the right input query.
+- UNION ALL - Includes duplicates.
+- UNION - Excludes duplicates.
+
+### Multilevel Group by
+
+![alt text](image-81.png)
+
+### Multilevel order by
+
+![alt text](image-82.png)
+
+### Grouping Sets
+
+![alt text](image-83.png)
