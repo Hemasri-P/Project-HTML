@@ -1047,7 +1047,7 @@ title as 'MovieInfo.title',--nesting json
 ,Directorid from Movies
 For json path,Root('Movie')
 
----Task----json----
+---Task----json---uses . ---
 Select
      Movies.MovieId as 'movie.id',
      movies.title as 'movie.title',
@@ -1060,7 +1060,7 @@ join Director on movies.DirectorId=Director.DirectorId
 join MovieActors on movies.MovieId=MovieActors.MovieId
 join Actor on MovieActors.ActorId=Actor.ActorId
 for json path
----------xml=---------
+---------xml=-----uses /----
 Select
 	Movies.MovieId as [movie/id],
 	Movies.Title  as [movie/title],
@@ -1083,6 +1083,8 @@ For XML Path('Movie'), Root ('Movies')
 
 ![alt text](image-87.png)
 ![alt text](image-86.png)
+
+- composite key : if there is no unique column , then we will used this composite key
 
 ### Cross join : Matrix multiplication
 
