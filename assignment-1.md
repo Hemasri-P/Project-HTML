@@ -29,8 +29,7 @@ SELECT * FROM CUSTOMERS;
 
 ![alt text](image-62.png)
 
-````
-```sql
+```
 CREATE TABLE Accounts (
 account_id INT Primary Key,
 customer_id INT,
@@ -54,12 +53,12 @@ Select * from Accounts;
 INSERT INTO Accounts (account_id, customer_id, account_type, balance)
 VALUES
 (11, 1, 'Investment', 2000.00);
-````
+```
 
 ![alt text](image-63.png)
 
 ```sql
- CREATE TABLE Transactions (
+CREATE TABLE Transactions (
 transaction_id INT Primary Key,
 account_id INT ,
 transaction_type VARCHAR(50), -- (e.g., deposit, withdrawal, transfer)
@@ -138,7 +137,7 @@ VALUES
 (8, 'Pine Street Branch', '789 Pine St'),
 (9, 'Elm Avenue Branch', '234 Elm Ave'),
 (10, 'Oak Road Branch', '876 Oak Rd');
- --Select * from  Branches;
+Select * from  Branches;
 ```
 
 ![alt text](image-66.png)

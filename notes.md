@@ -111,7 +111,7 @@ console.log(x1-x2); ==> -2
  5.Performance
 ```
 
-### coby value
+### copy value
 
 ```js
 var q1=[100,200];
@@ -276,12 +276,12 @@ const movies = [
 
 ```js
 let & const
-`` Template literal
+Template literal
 classesArow functions
 promise
 Destructing
 numeric seperators
-sprrd opeartor
+spread opeartor
 ```
 
 ### Object methods
@@ -881,7 +881,7 @@ select Concat('hemasri','54')
 - Exsist : checks for data , and gives boolean results.
 - Except / INTERSECT :
   EXCEPT returns distinct rows from the left input query that aren't output by the right input query.
-- UNION ALL - Includes duplicates.
+- UNION ALL - Includes dupli cates.
 - UNION - Excludes duplicates.
 
 ### Multilevel Group by
@@ -895,3 +895,230 @@ select Concat('hemasri','54')
 ### Grouping Sets
 
 ![alt text](image-83.png)
+
+![alt text](image-84.png)
+
+### Roollup vs Cube
+
+![alt text](image-85.png)
+
+### Ranking functions
+
+- Rank
+- Dense_rank
+- Row_number
+- N
+
+### Er Diagram
+
+| TransactionID | Date | ProductName | Category | Price | StoreName | City | Country | |---------------|------------|-------------|-----------|-------|-----------|------------|---------| | 1 | 2024-04-01 | Laptop | Electronics | 1200 | TechWorld | San Francisco | USA | | 2 | 2024-04-01 | Smartphone | Electronics | 800 | TechWorld | San Francisco | USA | | 3 | 2024-04-02 | Jeans | Apparel | 40 | FashionFiesta | New York | USA |
+has context menu-+
+
+## thurday - 20/06/24
+
+```sql
+CREATE TABLE Actor (
+	ActorId INT IDENTITY(201,1) PRIMARY KEY,
+    Name VARCHAR(30) NOT NULL
+);
+INSERT INTO Actor VALUES
+('Prabhas'),('Allu Arjun'),('Mahesh Babu'),('Ram Charan'),
+('Vijay Deverakonda'),('Jr. NTR'),('Nani'),('Pawan Kalyan');
+SELECT * FROM Actor;
+
+----------------
+CREATE TABLE Director (
+					DirectorId INT IDENTITY(101,1) PRIMARY KEY,
+					Name VARCHAR(30) NOT NULL
+);
+INSERT INTO Director VALUES
+('S. S. Rajamouli'), ('Trivikram Srinivas'), ('	Puri Jagannadh'),
+('Koratala Siva'),('Sandeep Reddy Vanga'),('Parasuram');
+
+
+SELECT * FROM Director;
+ -----------------------------------------
+CREATE TABLE Movies (
+					MovieId INT PRIMARY KEY IDENTITY(1,1),
+					 Title VARCHAR(20) NOT NULL UNIQUE,
+					 Year INT NOT NULL,
+					 DirectorId INT,
+
+					 CONSTRAINT Did_FK FOREIGN KEY (DirectorId)
+					 REFERENCES Director(DirectorId)
+)
+INSERT INTO Movies VALUES
+('Baahubali',2015,101),
+('AVPL',2020,102),
+('Pokiri',2006,103),
+('Magadheera',2009,101),
+('Srimanthudu',2015,104),
+('Arjun Reddy',2017,105),
+('Geetha Govindam',2018,106),
+('Temper',2015,103),
+('Eega',2012,101),
+('Attarintiki Daredi',2013,102);
+SELECT * FROM Movies;
+
+-------------------------
+CREATE TABLE MovieActors (MovieId INT,
+						  ActorId INT,
+						  CONSTRAINT PK_MovieActor PRIMARY KEY (MovieId, ActorId),
+						  CONSTRAINT MovieActor_FK1 FOREIGN KEY (MovieId)
+						  REFERENCES Movies(MovieId),
+						  CONSTRAINT MovieActor_FK2 FOREIGN KEY (ActorId)
+						  REFERENCES Actor(ActorId)
+)
+Insert into MovieActors Values (1,201),
+(2,202),
+(3,203),
+(4,204),
+(5,205),
+(6,206),
+(7,207),
+(8,208);
+Select * from MovieActors;
+
+----------------------------
+SELECT * FROM Actor
+SELECT * FROM Movies
+SELECT * FROM Director
+Select * from MovieActors
+---
+Alter Table Movies
+Add  Constraint Ck_year Check(
+Year >1900
+);
+-----DELETE PRABhas DATA FROM DATABASE------------
+Delete from Actor
+where Actorid =201;
+
+Delete from MovieActors
+where Actorid =201;
+Select * from Actor;
+--------------------Check validations ,by giving constaints names[in future we want to update or delete constraints]---------------------
+Alter table Actor
+Add constraint len_actor_name check(len("name")>4)
+
+Alter table Movies
+Add constraint year_gt_1900 check([year]>1900)
+
+---------------CASCADE DELETE----
+-- converts to xml[used to send data or code  between developers ] usig auto
+-----------XML -Auto [in the form of attributes]
+Select * from Movies
+For xml auto
+
+---------XML-Path [In the form of keys]
+Select * from Movies
+For xml path
+--Example [ we want to put them into 1 root]
+Select
+Movieid ,
+title,
+[year]
+,Directorid from Movies
+For xml path ('Movie'),Root
+----
+Select
+Movieid as [@Movieid] ,--attribute
+title,
+[year]
+,Directorid from Movies
+For xml path ('Movie'),Root
+--want to add extra data into code
+Select
+Movieid as [@Movieid]  ,
+title as [MovieInfo/title],
+[year] as[ MovieInfo/year]
+,Directorid from Movies
+For xml path ('Movie'),Root('Movie')
+---------JSON AUTO
+Select * from Movies
+For json auto
+----JSON Path
+Select * from Movies
+For json path , Root('movies')
+----want to add extra data into code to json
+Select
+Movieid as [Id] ,--renaming the key
+title as 'MovieInfo.title',--nesting json
+[year] as' MovieInfo.year'----nesting json
+,Directorid from Movies
+For json path,Root('Movie')
+
+---Task----json----
+Select
+     Movies.MovieId as 'movie.id',
+     movies.title as 'movie.title',
+     Director.DirectorId as ' director.id',
+     Director.name as ' director.name',
+     Actor.ActorId as ' actor.id',
+     Actor.Name as 'actor.name'
+from Movies
+join Director on movies.DirectorId=Director.DirectorId
+join MovieActors on movies.MovieId=MovieActors.MovieId
+join Actor on MovieActors.ActorId=Actor.ActorId
+for json path
+---------xml=---------
+Select
+	Movies.MovieId as [movie/id],
+	Movies.Title  as [movie/title],
+	Movies.Year  as [movie/year],
+	Director.DirectorId as [director/id],
+	Director.Name as [director/name],
+	Actor.ActorId as [actor/id],
+	Actor.Name as [actor/name]
+from
+Movies Join Director
+On Movies.DirectorId = Director.DirectorId
+Join MovieActors
+On Movies.MovieId = MovieActors.MovieId
+Join Actor
+On MovieActors.ActorId = Actor.ActorId
+For XML Path('Movie'), Root ('Movies')
+```
+
+### Keys
+
+![alt text](image-87.png)
+![alt text](image-86.png)
+
+### Cross join : Matrix multiplication
+
+![alt text](image-89.png)
+![alt text](image-88.png)
+
+## INNER JOIN TYPES
+
+```sql
+- NATURAL JOIN : NO NEED TO MENTION CONDITION , Result will be on inner join
+syntax : SELECT *
+FROM table1 NATURAL JOIN table2;
+- Equi join : NEED TO MENTION CONDITION ,Result will be on inner join , join statemnt have '='
+ Syntax : Syntax-
+SELECT *
+FROM table1 INNER JOIN table2 ON table1.Column_Name= table2.Column_Name;
+![alt text](image-90.png)
+- Inner join : not always do = , we can also do 'pk=fk' , pk>fk , pk,fk
+- Self join - combine the table with itself table.
+
+```
+
+### Format Functions : cast, convert
+
+```sql
+CAST syntax:
+CAST ( expression AS data_type [ ( length ) ] )
+CONVERT syntax:
+CONVERT ( data_type [ ( length ) ] , expression [ , style ] )
+
+A) Using the CAST() function to convert a decimal to an integer example
+This example uses the CAST() function to convert the decimal number 5.95 to an integer:
+
+SELECT CAST(5.95 AS INT) result; //5
+B) Using the CAST() function to convert a decimal to another decimal with different length
+The following example uses the CAST() function to convert the decimal number 5.95 to another decimal number with the zero scale:
+
+SELECT CAST(5.95 AS DEC(3,0)) result; // 6
+```
