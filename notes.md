@@ -914,7 +914,7 @@ select Concat('hemasri','54')
 | TransactionID | Date | ProductName | Category | Price | StoreName | City | Country | |---------------|------------|-------------|-----------|-------|-----------|------------|---------| | 1 | 2024-04-01 | Laptop | Electronics | 1200 | TechWorld | San Francisco | USA | | 2 | 2024-04-01 | Smartphone | Electronics | 800 | TechWorld | San Francisco | USA | | 3 | 2024-04-02 | Jeans | Apparel | 40 | FashionFiesta | New York | USA |
 has context menu-+
 
-## thurday - 20/06/24
+### Thurday - 20/06/24
 
 ```sql
 CREATE TABLE Actor (
@@ -1124,3 +1124,5 @@ The following example uses the CAST() function to convert the decimal number 5.9
 
 SELECT CAST(5.95 AS DEC(3,0)) result; // 6
 ```
+
+### Monday 24/06/24
