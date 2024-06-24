@@ -1125,4 +1125,288 @@ The following example uses the CAST() function to convert the decimal number 5.9
 SELECT CAST(5.95 AS DEC(3,0)) result; // 6
 ```
 
+### Friday 21/06/24
+
+```sql
+CREATE TABLE Movies (
+    MovieID INT PRIMARY KEY,
+    Title NVARCHAR(100),
+    ReleaseYear INT,
+    Director NVARCHAR(100),
+    Genre NVARCHAR(50),
+    Budget DECIMAL(18, 2),
+    BoxOffice DECIMAL(18, 2)
+);
+
+CREATE TABLE Actors (
+    ActorID INT PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    BirthDate DATE
+);
+
+CREATE TABLE MovieActors (
+    MovieID INT,
+    ActorID INT,
+    Role NVARCHAR(100),
+    PRIMARY KEY (MovieID, ActorID),
+    FOREIGN KEY (MovieID) REFERENCES Movies(MovieID),
+    FOREIGN KEY (ActorID) REFERENCES Actors(ActorID)
+);
+-- Movies
+INSERT INTO Movies (MovieID, Title, ReleaseYear, Director, Genre, Budget, BoxOffice) VALUES
+(1, 'Baahubali: The Beginning', 2015, 'S. S. Rajamouli', 'Action', 1800000000, 6500000000),
+(2, 'Baahubali: The Conclusion', 2017, 'S. S. Rajamouli', 'Action', 2500000000, 18000000000),
+(3, 'Sye', 2004, 'S. S. Rajamouli', 'Sports Drama', 120000000, 250000000),
+(4, 'Magadheera', 2009, 'S. S. Rajamouli', 'Fantasy', 400000000, 1500000000),
+(5, 'Arjun Reddy', 2017, 'Sandeep Reddy Vanga', 'Romance', 50000000, 510000000),
+(6, 'Rangasthalam', 2018, 'Sukumar', 'Drama', 60000000, 2160000000),
+(7, 'Maharshi', 2019, 'Vamsi Paidipally', 'Drama', 100000000, 1750000000),
+(8, 'Geetha Govindam', 2018, 'Parasuram', 'Romantic Comedy', 15000000, 1300000000),
+(9, 'Ala Vaikunthapurramuloo', 2020, 'Trivikram Srinivas', 'Action Comedy', 100000000, 2620000000),
+(10, 'Sarileru Neekevvaru', 2020, 'Anil Ravipudi', 'Action', 75000000, 2600000000);
+
+-- Actors
+INSERT INTO Actors (ActorID, FirstName, LastName, BirthDate) VALUES
+(1, 'Prabhas', 'Raju', '1979-10-23'),
+(2, 'Rana', 'Daggubati', '1984-12-14'),
+(3, 'Ram', 'Charan', '1985-03-27'),
+(4, 'Vijay', 'Deverakonda', '1989-05-09'),
+(5, 'Mahesh', 'Babu', '1975-08-09'),
+(6, 'Allu', 'Arjun', '1983-04-08'),
+(7, 'Samantha', 'Akkineni', '1987-04-28'),
+(8, 'Pooja', 'Hegde', '1990-10-13'),
+(9, 'Rashmika', 'Mandanna', '1996-04-05'),
+(10, 'Anushka', 'Shetty', '1981-11-07');
+
+-- MovieActors
+INSERT INTO MovieActors (MovieID, ActorID, Role) VALUES
+(1, 1, 'Baahubali'),
+(1, 2, 'Bhallaladeva'),
+(2, 1, 'Baahubali'),
+(2, 2, 'Bhallaladeva'),
+(4, 3, 'Kala Bhairava'),
+(5, 4, 'Arjun Reddy'),
+(7, 5, 'Rishi'),
+(9, 6, 'Bantu'),
+(10, 5, 'Ajay Krishna'),
+(9, 8, 'Ammu');
+-----------
+Select * from Movies
+Select * from MovieActors
+Select * from Actors
+-- Task: Create a view named ViewMoviesAfter2015 that selects movies released after the year 2015.
+Create view VwMoviesAfter2015
+as
+Select  movieid ,Title , ReleaseYear from Movies
+where [ReleaseYear] >= 2015 ;
+ Select * from vwMoviesAfter2015;
+
+--Exercise 2: View for High Box Office Movies
+--Task: Create a view named ViewHighBoxOfficeMovies that
+--selects movies with a box office collection greater than 1 billion.----------
+create  View vwHighBoxOfficeMovies
+as
+Select Movieid , Title ,BoxOffice from Movies
+where [BoxOffice]>=1000000000;
+Select  *  from vwHighBoxOfficeMovies
+
+-------------Exercise 3: View for Actor Details in Movies
+--Task: Create a view named ViewActorDetailsInMovies that joins Movies
+--and Actors through MovieActors and shows movie titles and actor names.
+Create view ViewActorDetailsInMovies
+as
+Select  Actors.ActorId, movies.Title , Actors.FirstName , Actors.LastName from Actors
+join MovieActors on MovieActors.ActorID=Actors.ActorID
+join Movies on Movies.MovieID=MovieActors.MovieID
+group by  Actors.ActorID , movies.title ,Actors.FirstName , Actors.LastName
+ Select * from ViewActorDetailsInMovies
+
+ -----------Exercise 4: View for Top Grossing Movies per Genre
+---Task: Create a view named ViewTopGrossingMoviesPerGenre
+--that shows the highest-grossing movie in each genre.
+Create view vwViewTopGrossingMoviesPerGenre
+as
+Select Movies.Title , Movies.Genre , Movies.BoxOffice ,
+DENSE_RANK() Over (Partition By Genre Order By BoxOffice Desc) As HighestGrossRank
+from Movies
+Group by Movies.MovieId ,Movies.Title , Movies.Genre,Movies.BoxOffice;
+
+Select Title,Genre,BoxOffice from vwViewTopGrossingMoviesPerGenre
+where HighestGrossRank =1;
+
+-----Exercise 5: View for Actor's Total Box Office Collection
+---Task: Create a view named ViewActorTotalBoxOffice that shows the total box office
+--collection for each actor across all their movies.
+create view ViewActorTotalBoxOffice
+as
+Select  FirstName ,LastName, Sum(Boxoffice) as TotalBoxoffice
+from Actors
+join MovieActors on MovieActors.ActorID=Actors.ActorID
+join Movies on Movies.MovieID=MovieActors.MovieID
+group by FirstName , LastName
+
+Select * from ViewActorTotalBoxOffice
+ --------Exercise 6: View for Actor's Age and Movie Roles
+---Task: Create a view named ViewActorAgeAndRoles that shows
+--each actor's age when acted that movie & also their current age
+--and the roles they played in different movies.
+Create view vwActorAgeAndRoles
+ as
+ Select concat(a.FirstName , a.LastName) as fullName ,
+  a.BirthDate, m.Title ,m.ReleaseYear ,ma.Role
+ from Movies m
+Join MovieActors ma
+On m.MovieID=ma.MovieID
+Join Actors a
+On a.ActorID=ma.ActorID
+
+Select * from vwActorAgeAndRoles;
+
+Select FullName, ReleaseYear-Year(BirthDate) As AgePerMovie , Year(GetDate())-Year(BirthDate) As CurrAge , Role
+From vwActorAgeAndRoles;
+---Functions Exercise---------- " @ " means Variable-------------
+--Exercise 1: Scalar Function-[we can used this in place of column name like aggregation functions]
+--to Calculate Movie Age -Task: Create a scalar function named dbo.CalculateMovieAge that takes a MovieID
+--and returns the age of the movie in years
+Create Function dbo.CalculateMovieAge(@MovieId int)
+Returns int
+As
+Begin
+    Declare @age int
+  Set @age = (Select Year(GetDate())-ReleaseYear
+              From Movies
+			  Where MovieID=@MovieID)
+Return(@age);
+End;
+Select *, dbo.CalculateMovieAge(MovieID)  as Age  --Scalar representation
+From Movies;
+------------Exercise 2: Inline Table-Valued Function for Movies within Budget Range
+--Task: Create an inline table-valued function named dbo.GetMoviesByBudgetRange
+--that takes MinBudget and MaxBudget and returns movies within that budget range.
+
+Create Function dbo.GetMoviesByBudgetRange (@MinBudget float , @MaxBudget float)
+Returns table
+As
+	Return (Select * From
+	         Movies
+			 Where Budget BETWEEN @MinBudget AND @MaxBudget);
+Select *
+FRom dbo.GetMoviesByBudgetRange(60000000,1800000000)
+
+--Exercise 3: Inline Table-Valued Function for Actor's Movies by Year
+--Task: Create an inline table-valued function named dbo.GetActorMoviesByYear
+--that takes an ActorID and Year and returns the movies the actor appeared in that year.
+Create Function dbo.GetActorMoviesByYear (@ActorID int ,@year int )
+Returns table
+as
+Return ( Select Actors.ActorID , Title , Year
+         from movies
+         join Actors on Actors.ActorID=Movies.MovieID
+
+
+
+--Exercise 4: Multi-Statement Table-Valued Function for Top Actors by Movie Count
+--Task: Create a multi-statement table-valued function named dbo.GetTopActorsByMovieCount
+--that returns actors who have acted in more than 2 movies.
+Create function dbo.GetTopActorsByMovieCount()
+Returns @tablewithactors Table (ActorId int, FullName nvarchar(50))
+As
+  Begin
+   Insert into @tablewithactors  --Temporary tablem
+   Select ActorId , CONCAT(FirstName,' ',LastName)
+   From Actors
+   Where ActorID In (Select ActorID
+                     From MovieActors
+					 Group By ActorID
+					 Having COUNT(*) > =   2)
+Return
+END;
+drop function dbo.GetTopActorsByMovieCount
+Select *   ---output  --no actor with 2 movies
+FROm dbo.GetTopActorsByMovieCount();
+
+--Exercise 5: Multi-Statement Table-Valued Function for Actors with Multiple Roles
+--Task: Create a multi-statement table-valued function named dbo.GetActorsWithMultipleRoles
+--that returns actors who have played more than one role in the same movie.
+Create Function dbo.GetActorsWithMultipleRoles()
+Returns @tablewithMultipleRoles table (movieId int, ActorId int ,Role varchar(50)  )
+As
+  Begin
+   Insert into  @tablewithMultipleRoles
+   Select first_tb.MovieID,first_tb.ActorId , first_tb.Role
+   From MovieActors first_tb
+   join MovieActors sec_tb
+   on first_tb.MovieID=sec_tb.MovieId
+   and
+   first_tb.ActorID=sec_tb.ActorID
+   and
+   first_tb.Role <> sec_tb.role;
+   return;
+   End
+
+Select * from dbo.GetActorsWithMultipleRoles();
+
+--Task 1: Categorize Movies Based on Box Office Collections
+--Task: Create a query to categorize movies into three groups based on their
+--box office collections: 'Blockbuster', 'Hit', and 'Average'. Use the following criteria:
+--Blockbuster: BoxOffice > 10,000,000,000
+--Hit: BoxOffice between 1,000,000,000 and 10,000,000,000
+--Average: BoxOffice < 1,000,000,000
+Select *,
+case
+   when BoxOffice >= 10000000000 then 'Blockbuster'
+   when BoxOffice <= 1000000000 then 'Average'
+   else 'Hit'
+   end as rating
+from movies
+--------Task 2: Determine Actor's Age Group
+---Task: Create a query to determine the age group of each actor based on their birth date.
+--The age groups are 'Young' (age < 30),
+--'Middle-aged' (age between 30 and 50), and 'Senior' (age > 50).
+Select *,
+Case When Year(GetDate())-Year(BirthDate) <30 Then 'Young'
+     When Year(GetDate())-Year(BirthDate) Between 30 And 50 Then 'Middle-aged'
+	 Else 'Senior'
+	 End as Age
+From Actors
+
+--Task 3: Evaluate Movie Profitability
+--Task: Create a query to evaluate the profitability of each movie.
+--Consider a movie 'Profitable' if BoxOffice > Budget and 'Not Profitable' if BoxOffice <= Budget.
+Select *,
+Case
+  when BoxOffice > Budget then 'Profitable'
+  else 'Not Profitable'
+  end as profitability
+from Movies
+
+----Stored procedures ---
+Declare   @OrderAmount decimal(10,2)
+if @OrderAmount > 1000
+Begin
+    Print 'Applying 10% discount '
+	end
+	else
+	Begin
+	 print 'No discount'
+	 end
+-----------------
+	 Declare @counter Int=10
+	 while @counter> 0
+	 Begin
+	 print @counter
+	 Set @counter =@counter -1
+	 end
+	 -----EXample--------
+	 Create procedure spgetMoviesByGenre
+	    @Genre nvarchar(20)
+		as
+		begin
+	 Select * from movies
+	 where Genre =@Genre
+	 end
+	 Execute spgetMoviesByGenre 'Action'
+```
+
 ### Monday 24/06/24
