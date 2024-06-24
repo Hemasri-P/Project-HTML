@@ -1410,3 +1410,18 @@ Begin
 ```
 
 ### Monday 24/06/24
+
+- Reading is inversly prportional to Insertion in mongoDB.
+- To increasing reading speed we use -Indexing
+- Example : Index scan Reads all rows
+- Types :
+  - cluster [created when pk created ] - decides table order , only 1 per table
+  - Noncluster[on other keys],[created when we want to give indexing to other columns] -unable to decided table order , many per table.
+
+### ACID Properties
+
+1. Atomicity : Both should pass or fail
+2. Consistency : cannot have ghost data , neither created nor destroyed
+3. Isolation : Seperation , Ex: booking 1 ticket by 2 members
+   ![alt text](image-91.png)
+4. Durability : data after the successful execution of the operation becomes permanent in the database.
