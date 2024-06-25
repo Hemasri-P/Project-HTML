@@ -1,11 +1,9 @@
-CREATE TABLE Customers (
-    customer_id INT Primary Key,
-    first_name VARCHAR(100),
-    last_name VARCHAR(100),
-    DOB DATE,
-    email VARCHAR(100),
-    phone_number INT,
-    address VARCHAR(100)
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName NVARCHAR(50)
 );
-
-INSERT INTO Customers
+ 
+-- Insert sample departments
+INSERT INTO Departments (DepartmentID, DepartmentName) VALUES
+(1, 'HR')
+SELECT * from Departments

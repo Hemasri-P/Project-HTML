@@ -1404,12 +1404,14 @@ Begin
 
 ### Monday 24/06/24
 
+```sql
 - Reading is inversly prportional to Insertion in mongoDB.
 - To increasing reading speed we use -Indexing
 - Example : Index scan Reads all rows
 - Types :
   - Cluster [created when pk created ] - decides table order , only 1 per table
   - Noncluster[on other keys],[created when we want to give indexing to other columns] -unable to decided table order , many per table.Subtree cost gives the time taken to execution
+```
 
 ### ACID Properties
 
@@ -1422,3 +1424,59 @@ Begin
 4. Durability :Roll back , data after the successful execution of the operation becomes permanent in the database.It talks about the failure after transaction completed.
 
 ### Tuesday - 25/06/24
+
+```sql
+Filter index :used for  particular filter statement
+Example :
+Create index IX_Filtered_Year
+on movies
+where releaseyear=2020
+
+exec sp_helpdindex movies
+
+Select title from movies
+where year=2020;
+
+-- checking the performance
+alter  index IX_Filtered_Year on movies disable ;
+
+--to enable
+alter  index IX_Filtered_Year on movies Rebuild ;
+
+--rename
+Exec sp_rename ' movies.index IX_Filtered_Year', ' IX_Filter_Year';
+```
+
+### COALESCE FUNCTION :
+
+```sql
+WHICH EVER IS NOT NULL , IT WILL RETURNS THAT
+
+EXAMPLE : select  COALESCE(First_last ,last_name,middle name )from users
+Select COALESCE(null,null,'First-non-null value') as FirstNonnullValue
+```
+
+### System info function
+
+```sql
+SELECT DB_NAME () AS CURRENTDATABSE;
+SELECT @@VERSION AS SQLSERVERVERSION;
+
+SELECT @@SERVICENAME AS ServiceName;
+SELECT SESSIION_USER AS CURRentSessionUser;
+Select System_user as SystemUserName ;
+
+---------- User Defined Datatypes
+ Create Type PhoneNumber from varchar(15) not null
+
+ Create table customer_data (
+ Contact_id  int primary key,
+ name varchar(50),
+ Phone Phonenumber
+ )
+ Insert into Customer_data values (1, 'sindu','1234-456-7891')
+ Select * from Customer_data;
+
+```
+
+- Create a table with an xml column
