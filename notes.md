@@ -1479,4 +1479,10 @@ Select System_user as SystemUserName ;
 
 ```
 
+### xml
+
 - Create a table with an xml column
+- assign xml data to a variable
+  -Parse the xml document [there could be illegal data]
+- Query the xml data using OPENXML[to do some powerful sql commands]
+- clear the memory
