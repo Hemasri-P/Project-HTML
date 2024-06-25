@@ -1236,8 +1236,7 @@ Select Title,Genre,BoxOffice from vwViewTopGrossingMoviesPerGenre
 where HighestGrossRank =1;
 
 -----Exercise 5: View for Actor's Total Box Office Collection
----Task: Create a view named ViewActorTotalBoxOffice that shows the total box office
---collection for each actor across all their movies.
+---Task: Create a view named ViewActorTotalBoxOffice that shows the total box office collection for each actor across all their movies.
 create view ViewActorTotalBoxOffice
 as
 Select  FirstName ,LastName, Sum(Boxoffice) as TotalBoxoffice
@@ -1247,10 +1246,8 @@ join Movies on Movies.MovieID=MovieActors.MovieID
 group by FirstName , LastName
 
 Select * from ViewActorTotalBoxOffice
- --------Exercise 6: View for Actor's Age and Movie Roles
----Task: Create a view named ViewActorAgeAndRoles that shows
---each actor's age when acted that movie & also their current age
---and the roles they played in different movies.
+ ------Exercise 6: View for Actor's Age and Movie Roles
+---Task: Create a view named ViewActorAgeAndRoles that shows each actor's age when acted that movie & also their current age and the roles they played in different movies.
 Create view vwActorAgeAndRoles
  as
  Select concat(a.FirstName , a.LastName) as fullName ,
@@ -1266,8 +1263,8 @@ Select * from vwActorAgeAndRoles;
 Select FullName, ReleaseYear-Year(BirthDate) As AgePerMovie , Year(GetDate())-Year(BirthDate) As CurrAge , Role
 From vwActorAgeAndRoles;
 ---Functions Exercise---------- " @ " means Variable-------------
---Exercise 1: Scalar Function-[we can used this in place of column name like aggregation functions]
---to Calculate Movie Age -Task: Create a scalar function named dbo.CalculateMovieAge that takes a MovieID
+--Exercise 1: Scalar Function-[we can used this in place of column name like aggregation functions]to Calculate Movie Age
+--Task: Create a scalar function named dbo.CalculateMovieAge that takes a MovieID
 --and returns the age of the movie in years
 Create Function dbo.CalculateMovieAge(@MovieId int)
 Returns int
@@ -1304,11 +1301,8 @@ Return ( Select Actors.ActorID , Title , Year
          from movies
          join Actors on Actors.ActorID=Movies.MovieID
 
-
-
 --Exercise 4: Multi-Statement Table-Valued Function for Top Actors by Movie Count
---Task: Create a multi-statement table-valued function named dbo.GetTopActorsByMovieCount
---that returns actors who have acted in more than 2 movies.
+--Task: Create a multi-statement table-valued function named dbo.GetTopActorsByMovieCount that returns actors who have acted in more than 2 movies.
 Create function dbo.GetTopActorsByMovieCount()
 Returns @tablewithactors Table (ActorId int, FullName nvarchar(50))
 As
@@ -1361,9 +1355,8 @@ case
    end as rating
 from movies
 --------Task 2: Determine Actor's Age Group
----Task: Create a query to determine the age group of each actor based on their birth date.
---The age groups are 'Young' (age < 30),
---'Middle-aged' (age between 30 and 50), and 'Senior' (age > 50).
+--Task: Create a query to determine the age group of each actor based on their birth date.
+--The age groups are 'Young' (age < 30),'Middle-aged' (age between 30 and 50), and 'Senior' (age > 50).
 Select *,
 Case When Year(GetDate())-Year(BirthDate) <30 Then 'Young'
      When Year(GetDate())-Year(BirthDate) Between 30 And 50 Then 'Middle-aged'
@@ -1415,13 +1408,17 @@ Begin
 - To increasing reading speed we use -Indexing
 - Example : Index scan Reads all rows
 - Types :
-  - cluster [created when pk created ] - decides table order , only 1 per table
-  - Noncluster[on other keys],[created when we want to give indexing to other columns] -unable to decided table order , many per table.
+  - Cluster [created when pk created ] - decides table order , only 1 per table
+  - Noncluster[on other keys],[created when we want to give indexing to other columns] -unable to decided table order , many per table.Subtree cost gives the time taken to execution
 
 ### ACID Properties
 
-1. Atomicity : Both should pass or fail
+1. Atomicity : Both should pass or fail , It talks about the failures during the transaction completed /failured.
 2. Consistency : cannot have ghost data , neither created nor destroyed
-3. Isolation : Seperation , Ex: booking 1 ticket by 2 members
-   ![alt text](image-91.png)
-4. Durability : data after the successful execution of the operation becomes permanent in the database.
+3. Isolation : Seperation , Ex: booking 1 ticket by 2 members: others rows are not effected by particular row.
+
+![alt text](image-91.png)
+
+4. Durability :Roll back , data after the successful execution of the operation becomes permanent in the database.It talks about the failure after transaction completed.
+
+### Tuesday - 25/06/24
