@@ -914,7 +914,7 @@ select Concat('hemasri','54')
 | TransactionID | Date | ProductName | Category | Price | StoreName | City | Country | |---------------|------------|-------------|-----------|-------|-----------|------------|---------| | 1 | 2024-04-01 | Laptop | Electronics | 1200 | TechWorld | San Francisco | USA | | 2 | 2024-04-01 | Smartphone | Electronics | 800 | TechWorld | San Francisco | USA | | 3 | 2024-04-02 | Jeans | Apparel | 40 | FashionFiesta | New York | USA |
 has context menu-+
 
-### Thurday - 20/06/24
+### Thursday - 20/06/24
 
 ```sql
 CREATE TABLE Actor (
@@ -1530,3 +1530,5 @@ EXEC sp_xml_removedocument @xmlDoc;
   ![alt text](image-93.png)
 
 ### Triggers
+
+![alt text](image-94.png)
