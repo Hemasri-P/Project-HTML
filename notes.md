@@ -898,15 +898,15 @@ select Concat('hemasri','54')
 
 ![alt text](image-84.png)
 
-### Roollup vs Cube
+### Roollup [short form of grouping sets] vs Cube[ will get all possible combinations]
 
 ![alt text](image-85.png)
 
 ### Ranking functions
 
-- Rank
-- Dense_rank
-- Row_number
+- Rank : 2nd heighest
+- Dense_rank: 3rd heighest
+- Row_number : highest rank
 - N
 
 ### Er Diagram
@@ -1404,14 +1404,12 @@ Begin
 
 ### Monday 24/06/24
 
-```sql
 - Reading is inversly prportional to Insertion in mongoDB.
 - To increasing reading speed we use -Indexing
 - Example : Index scan Reads all rows
 - Types :
   - Cluster [created when pk created ] - decides table order , only 1 per table
-  - Noncluster[on other keys],[created when we want to give indexing to other columns] -unable to decided table order , many per table.Subtree cost gives the time taken to execution
-```
+  - Noncluster[on other keys],[created when we want to give indexing to other columns] -unable to decided table order , many per table.Subtree cost gives the time taken to execution , it creates a binary tree structure.
 
 ### ACID Properties
 
@@ -1479,7 +1477,7 @@ Select System_user as SystemUserName ;
 
 ```
 
-### xml
+### XML
 
 - Create a table with an xml column
 - assign xml data to a variable
@@ -1522,3 +1520,13 @@ WITH (
 -- Clear the memory
 EXEC sp_xml_removedocument @xmlDoc;
 ```
+
+### Wednesday 26/06 - Recape on previous week topics :
+
+- Views : we cannot use order by in views but we can use out side the views
+- When we do update on Views , it would updates on main table too
+  ![alt text](image-92.png)
+- Rollup
+  ![alt text](image-93.png)
+
+### Triggers
