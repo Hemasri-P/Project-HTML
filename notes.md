@@ -674,7 +674,7 @@ commit stage:
 
 ### PAAS : Netlify , Rendor , Railway , Vercel . It provides environment, we have to use it to develop and used by Freelancers, developers.
 
-### IAAS : AWS , Microsoft Azure
+### IAAS : AWS , Microsoft Azure , GCP
 
 ![alt text](image-9.png)
 ![alt text](image-10.png)
@@ -1532,3 +1532,29 @@ EXEC sp_xml_removedocument @xmlDoc;
 ### Triggers
 
 ![alt text](image-94.png)
+
+### Thursday 27/06/24
+
+### AWS
+
+- IAAS and PAAS
+- Offers scalable solution for compute , storage , databases , analytics
+
+#### Adavantages
+
+- Trade upfront expense for varibale expense
+- Benefit from massive economics of scale
+- Pay as u go
+- Increase speed , agility
+- stop spending money on running
+- go global in minutes [can able to deploy app in multiple comapanies globally]
+  ![alt text](image-95.png)
+  ![alt text](image-96.png)
+  ![alt text](image-97.png)
+  ![alt text](image-98.png)
+- EC2 : ELASTIC CLOUD COMPUTE [WE can able to add RAM or remove RAM anytime ]
+- S3: Simple storage service [ stores files have large data like pics ,videos , csv file , loges etc]
+- Dynamo DB : orders , account data , Credentials
+- EBS [Enterprise Business System ]: operating system , less storage , faster , stores source code.
+
+### AWS infrastructure ans services
