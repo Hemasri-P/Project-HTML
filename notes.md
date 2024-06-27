@@ -1558,3 +1558,11 @@ EXEC sp_xml_removedocument @xmlDoc;
 - EBS [Enterprise Business System ]: operating system , less storage , faster , stores source code.
 
 ### AWS infrastructure ans services
+
+![alt text](image-99.png)
+
+### AWS global infrastructure
+
+![alt text](image-101.png)
+![alt text](image-102.png)
+![alt text](image-103.png)
