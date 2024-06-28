@@ -1569,5 +1569,11 @@ EXEC sp_xml_removedocument @xmlDoc;
 
 ### Friday -28/06/24
 
-- Authorization [what you can do]
-- authentication[who ypu are]
+- Authorization [what you can do] like Access
+- Authentication[who you are]
+- Authentication Flow
+- IAM Elements : AWS identity and management
+  - Users
+  - Groups
+  - Roles (works on trust bases)
+  - Policies ( way to enforce the roles)

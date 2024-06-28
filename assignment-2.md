@@ -201,47 +201,54 @@ as (
 
 ### Section 5: Questions for Running Total and Running Average with OVER Clause
 
-````sql
+```sql
 -- 1 Running Total of Sales Amount by Book
 --Create a view that displays each sale for a book along with the running total of the sales amount using the OVER clause.
+Create view vwEachSaleOfBooks
+ as
+ Select books.book_id ,
+ Sum(total_amount) Over (Partition By books.book_id Order By total_amount ) As HighestRank
+from sales
+left join books on books.book_id=sales.book_id
 
+Select * from vwEachSaleOfBooks
 
+```
 
+![alt text](image-117.png)
 
+```sql
+--2 Running Total of Sales Quantity by Author
+--Create a view that displays each sale for an author along with the running total of the sales quantity using the OVER clause.
+Create view vwSaleforAuthor
+ as
+ Select  authors.author_id ,authors.name ,sales.sale_id,
+Sum(quantity) Over (Partition By authors.author_id Order By sales.quantity ) As RunningTotal
+from sales
+left join books  on books.book_id = sales.book_id
+ join authors on authors.author_id =books.author_id
 
+Select * from vwSaleforAuthor
+```
 
+![alt text](image-118.png)
 
+```sql
+--3  Running Total and Running Average of Sales Amount by Genre
+----Create a view that displays each sale for a genre along with both the running total and the running average of the sales amount using the OVER clause.
+Create view vwSaleforGenre
+as
+select authors.author_id,genre ,
+sum(total_amount) Over (Partition By books.genre Order By sales.total_amount ) As RunningTotal,
+Avg(total_amount) Over (Partition By books.genre Order By sales.total_amount ) As RunningAvg
+from sales
+join books on books.book_id=sales.book_id
+join authors on authors.author_id =books.author_id
 
+Select * from vwSaleforGenre
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![alt text](image-119.png)
 
 ### Section 6: Triggers
 
@@ -270,7 +277,7 @@ on sales
 
   Select * from sales
   Select * from books
-````
+```
 
 ![alt text](image-115.png)
 
