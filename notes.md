@@ -1566,3 +1566,8 @@ EXEC sp_xml_removedocument @xmlDoc;
 ![alt text](image-101.png)
 ![alt text](image-102.png)
 ![alt text](image-103.png)
+
+### Friday -28/06/24
+
+- Authorization [what you can do]
+- authentication[who ypu are]

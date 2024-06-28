@@ -199,6 +199,50 @@ as (
 
 ![alt text](image-114.png)
 
+### Section 5: Questions for Running Total and Running Average with OVER Clause
+
+````sql
+-- 1 Running Total of Sales Amount by Book
+--Create a view that displays each sale for a book along with the running total of the sales amount using the OVER clause.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Section 6: Triggers
 
 ```sql
@@ -226,7 +270,7 @@ on sales
 
   Select * from sales
   Select * from books
-```
+````
 
 ![alt text](image-115.png)
 
@@ -255,5 +299,8 @@ end
 ![alt text](image-116.png)
 
 ```sql
+--3 .Trigger to Prevent Negative Quantity on Update
+--Create a trigger that prevents updates to the sales table if the new quantity is negative.
+
 
 ```
