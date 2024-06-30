@@ -531,33 +531,163 @@ create nonclustered index ix_bookid on sales([book_id])
 
 ![alt text](image-134.png)
 
-````sql
+```sql
+--6.
+select a.author_id,a.name,a.country,a.birth_year,
+(select b.book_id,b.title,b.genre,b.price from books b where b.author_id=a.author_id
+for XML PATH('book'), type
+)as books
+from authors a for XML PATH('author'), root('authors')
+--output
+<authors>
+  <author>
+    <author_id>1</author_id>
+    <name>George Orwell</name>
+    <country>UK</country>
+    <birth_year>1903</birth_year>
+    <books>
+      <book>
+        <book_id>1</book_id>
+        <title>1984</title>
+        <genre>Dystopian</genre>
+        <price>15.99</price>
+      </book>
+    </books>
+  </author>
+  <author>
+    <author_id>2</author_id>
+    <name>J.K. Rowling</name>
+    <country>UK</country>
+    <birth_year>1965</birth_year>
+    <books>
+      <book>
+        <book_id>2</book_id>
+        <title>Harry Potter and the Philosophers Stone</title>
+        <genre>Fantasy</genre>
+        <price>50.00</price>
+      </book>
+    </books>
+  </author>
+  <author>
+    <author_id>3</author_id>
+    <name>Mark Twain</name>
+    <country>USA</country>
+    <birth_year>1835</birth_year>
+    <books>
+      <book>
+        <book_id>3</book_id>
+        <title>Adventures of Huckleberry Finn</title>
+        <genre>Fiction</genre>
+        <price>10.00</price>
+      </book>
+    </books>
+  </author>
+  <author>
+    <author_id>4</author_id>
+    <name>Jane Austen</name>
+    <country>UK</country>
+    <birth_year>1775</birth_year>
+    <books>
+      <book>
+        <book_id>4</book_id>
+        <title>Pride and Prejudice</title>
+        <genre>Romance</genre>
+        <price>12.00</price>
+      </book>
+    </books>
+  </author>
+  <author>
+    <author_id>5</author_id>
+    <name>Ernest Hemingway</name>
+    <country>USA</country>
+    <birth_year>1899</birth_year>
+    <books>
+      <book>
+        <book_id>5</book_id>
+        <title>The Old Man and the Sea</title>
+        <genre>Fiction</genre>
+        <price>8.99</price>
+      </book>
+    </books>
+  </author>
+</authors>
+```
 
+![alt text](image-135.png)
 
+```sql
+--task 7: Export Data as JSON
+--Write a query to export the authors and their books as JSON.
+select a.author_id,a.name,a.country,a.birth_year,
+(select b.book_id,b.title,b.genre,b.price from books b where b.author_id=a.author_id
+for json PATH
+)as books
+from authors a
+for json PATH, root('authors')
+--output-
+{"authors":[{"author_id":1,"name":"George Orwell","country":"UK","birth_year":1903,
+"books":[{"book_id":1,"title":"1984","genre":"Dystopian","price":15.99}]},{"author_id":2,"name":"J.K. Rowling","country":"UK","birth_year":1965,
+"books":[{"book_id":2,"title":"Harry Potter and the Philosophers Stone","genre":"Fantasy","price":50.00}]},{"author_id":3,"name":"Mark Twain","country":"USA","birth_year":1835,"books":[{"book_id":3,"title":"Adventures of Huckleberry Finn","genre":"Fiction","price":10.00}]},{"author_id":4,"name":"Jane Austen","country":"UK","birth_year":1775,"books":[{"book_id":4,"title":"Pride and Prejudice","genre":"Romance","price":12.00}]},{"author_id":5,"name":"Ernest Hemingway","country":"USA","birth_year":1899,"books":[{"book_id":5,"title":"The Old Man and the Sea","genre":"Fiction","price":8.99}]}]}
 
+```
 
+![alt text](image-136.png)
 
+```sql
+----task 8: Scalar Function for Total Sales in a Year-
+---Create a scalar function that returns the total sales amount in a given year and use it in a query to display the total sales for 2024.
 
+create function dbo.salesInYr(@yr int)
+returns int
+as
+begin
+declare @tolSales int
+set @tolSales =(select sum(total_amount) from sales
+           where year(sale_date)=@yr);return @tolSales
+		   end
+		   go
+		   select dbo.salesInYr(2024);
+```
 
+![alt text](image-137.png)
 
+```sql
+--task 9:Stored Procedure for Genre Sales Report--
+ --Create a stored procedure that returns a sales report for a specific genre, including total sales and average sales, and use it to display the report for 'Fiction'.
+create procedure sp_GenreSalesReport
+@genre varchar(max)
+as
+begin
+select b.genre, sum(s.total_amount) as TotalSales,avg(s.total_amount) as avgSales from books b
+join sales s on s.book_id=b.book_id
+group by b.genre having genre=@genre
+end
+exec sp_GenreSalesReport @genre ='fiction'
+```
 
+![alt text](image-138.png)
 
+```sql
+--task 10: Ranking Books by Average Rating (assuming a ratings table)---
+--Write a query to rank books by their average rating and display the top 3 books.-
+Assume a ratings table with book_id and rating columns.
+create table ratings (book_id int , rating int )
+insert into ratings values( 1, 8 );
+insert into ratings values( 2, 9 );
+insert into ratings values( 3, 9 );
+insert into ratings values( 4, 10 );
+insert into ratings values( 5, 7 );
 
+Select * from ratings
+select top(3) b.title,b.book_id ,avg(r.rating) as avgRating from ratings r
+left join books b
+on b.book_id=r.book_id
+group by b.title,b.book_id
+order by avg(r.rating) desc
 
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+![alt text](image-139.png)
 
 ### Section 5: Questions for Running Total and Running Average with OVER Clause
 
@@ -573,7 +703,7 @@ left join books on books.book_id=sales.book_id
 
 Select * from vwEachSaleOfBooks
 
-````
+```
 
 ![alt text](image-117.png)
 
