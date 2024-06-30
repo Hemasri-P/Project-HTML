@@ -333,41 +333,231 @@ exec GetTopSellingBookInGenre  @genre='Fantasy'
 
 ![alt text](image-125.png)
 
+### Section 3: Stored Procedures with Transactions and Validations
+
 ```sql
+--1 Add New Book and Update Author's Average Price
 
+--Create a stored procedure that adds a new book and updates the average price of books for the author. Ensure the price is positive, use transactions to ensure data integrity, and return the new average price.Delete Book and Update Author's Total Sales
+```
 
+```sql
+--2 Create a stored procedure that deletes a book and updates the author's total sales. Ensure the book exists, use transactions to ensure data integrity, and return the new total sales for the author.
+create procedure sp_DeleteBook
+ @book_id int
+ as
+ begin
+ begin transaction;
+  BEGIN TRY
+  if not exists (select * from books where book_id=@book_id)
+  throw 50000,'Book not there',1;
+  delete from books where  book_id=@book_id
+  commit transaction;
+   select sum(total_amount) as SalesPrice from sales
+   where book_id in (select o.book_id from books o where author_id =   (select i.author_id from books i where i.book_id=@book_id));
+  end try
+  begin catch
+  rollback transaction;
+  print concat('error number:',error_number());
+  print 'errormessage : ' + error_message();
+  print concat('error state : ', error_state());
+  end catch
+  end
+go
+exec sp_DeleteBook @book_id =8
+select * from books
+```
 
+![alt text](image-126.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+```sql
+--3  Transfer Book Sales to Another Book
+--Create a stored procedure that transfers sales from one book to another and updates the total sales for both books. Ensure both books exist, use transactions to ensure data integrity, and return the new total sales for both books.
+create procedure sp_transferSales
+ @sale_id int ,@book1 int,@book2 int
+ as
+ begin
+ begin transaction;
+  BEGIN TRY
+  if not exists (select * from books where book_id=@book1 )
+  throw 50000,'Book not there',1;
+  if not exists (select * from books where book_id=@book2 )
+  throw 50000,'Book not there',1;
+  if (select book_id from sales where sale_id=@sale_id )!=@book1  throw 50000,'invalid data',1;
+  update  sales  set book_id=@book2
+  where sale_id=@sale_id
+  update sales
+  set total_amount =(select quantity from sales where sale_id=@sale_id) * (select price from books where book_id=@book2)
+  where sale_id=@sale_id
+  commit transaction;
+  end try
+  begin catch
+	rollback transaction;
+	print concat('error number:',error_number());
+	print 'errormessage : ' + error_message();
+	print concat('error state : ', error_state());
+  end catch
+  end
+go
+exec sp_transferSales @sale_id=7,@book1=2,@book2=3select * from sales
 
 ```
+
+![alt text](image-127.png)
+
+```sql
+--4.-Task 4: Add Sale and Update Book Quantity
+--Create a stored procedure that adds a sale and updates the total quantity sold for the book. Ensure the quantity is positive, use transactions to ensure data integrity, and return the new total quantity sold for the book.
+create procedure sp_Addsales@sale_id int,@book_id int ,@sale_date date ,@quantity int,@total_amount decimal(5,2)asbeginbegin transaction;
+  BEGIN TRY
+  if not exists (select * from books where book_id=@book_id)
+  throw 50000,'book not there',1;
+  if (@quantity<1)
+  throw 50000,'quantity should be positive',1;
+  insert into sales values  (@sale_id ,@book_id, @sale_date, @quantity, @total_amount);
+  commit transaction;
+   select sum(quantity ) as totalQty from sales where book_id=@book_id;
+  end try
+  begin catch
+	rollback transaction;
+  end catchendgoexec sp_Addsales @sale_id=6,@book_id =1 ,@sale_date = '2024-02-01', @quantity =4,@total_amount =63.96
+  select * from sales
+```
+
+![alt text](image-128.png)
+
+```sql
+--task 5:Update Book Price and Recalculate Author's Average Price
+--Create a stored procedure that updates the price of a book and recalculates the average price of books for the author. Ensure the price is positive, use transactions to ensure data integrity, and return the new average price.
+create procedure sp_UpdateBookPrice
+@book_id int,@price decimal(5,2)
+as
+begin
+begin transaction;
+  BEGIN TRY
+  if not exists (select * from books where book_id=@book_id)
+  throw 50000,'Book not there',1;
+  if(@price<1)
+  throw 50000,'price should be positive',1;
+  Update  books set price=@price where  book_id=@book_id ;
+  commit transaction;
+    select avg(price) as averagePrice from books
+  where author_id=(select author_id from books where book_id=@book_id) ;
+  end try
+  begin catch
+  rollback transaction;
+  print concat('error number:',error_number());
+  print 'errormessage : ' + error_message();
+  print concat('error state : ', error_state());
+  end catch
+  end
+  go
+  exec sp_UpdateBookPrice @book_id =2 ,@price =50
+```
+
+![alt text](image-129.png)
+
+### SECTION 4 Advanced SQL Concepts
+
+```sql
+--task 1: Inline Table-Valued Function (iTVF)
+--Create an inline table-valued function that returns the total sales amount for each book and use it in a query to display the results.
+create function dbo.totalSalesforBook(@author_id int)
+returns table
+as
+return(select book_id,sum(total_amount) as totalSales from sales
+ group by book_id
+ having book_id in(select book_id from books where author_id =@author_id))
+ select * from  dbo.totalSalesforBook(2)
+
+```
+
+![alt text](image-130.png)]
+
+```sql
+--task 2:Multi-Statement Table-Valued Function (MTVF)
+--Create a multi-statement table-valued function that returns the total quantity sold for each genre and use it in a query to display the results.
+create function dbo.totalQtyforGenre()
+ returns @tempTb Table ( genre varchar(max),Qty int)
+ as
+ begin
+ insert into @tempTb
+ select b.genre, sum(s.quantity) as totalQty from sales s
+ left join books b on b.book_id=s.book_id
+ group by b.genre;return;
+ end
+ select * from dbo.totalQtyforGenre()
+```
+
+![alt text](image-131.png)
+
+```sql
+-- 3,task 3: Scalar Function
+--Create a scalar function that returns the average price of books for a given author and use it in a query to display the average price for 'Jane Austen'.
+create function dbo.avgPrice(@name varchar(max))
+ returns int
+ as
+ begin
+ declare @avg int
+ set @avg =(select avg(price) from books
+           where author_id=(select author_id from authors where name=@name));
+		   return @avg
+		   end
+		   go
+		   select dbo.avgPrice('Jane Austen');
+
+```
+
+![alt text](image-132.png)
+
+```sql
+--task 4: Stored Procedure for Books with Minimum Sales Create a stored procedure that returns books with total sales above a specified amount and use it to display books with total sales above $40.
+create procedure sp_BookSales
+ @totalSales int
+ as
+ begin
+ select book_id , title from books
+ where book_id in (select book_id  from sales group by book_id having sum(total_amount)>@totalSales)
+ end
+ exec sp_BookSales @totalSales=40
+```
+
+![alt text](image-133.png)
+
+```sql
+--task 5:Indexing for Performance Improvement Create an index on the sales table to improve query performance for queries filtering by book_id.
+create nonclustered index ix_bookid on sales([book_id])
+```
+
+![alt text](image-134.png)
+
+````sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Section 5: Questions for Running Total and Running Average with OVER Clause
 
@@ -383,7 +573,7 @@ left join books on books.book_id=sales.book_id
 
 Select * from vwEachSaleOfBooks
 
-```
+````
 
 ![alt text](image-117.png)
 
