@@ -199,6 +199,176 @@ as (
 
 ![alt text](image-114.png)
 
+### Section 2: Questions
+
+```sql
+--Task 1: Stored Procedure for Total Sales by Author
+--Create a stored procedure to get the total sales amount for a specific author and write a query to call the procedure for 'J.K. Rowling'.
+CREATE PROCEDURE GetTotalSalesByAuthor(@name VARCHAR(50))
+as
+BEGIN
+    SELECT a.name AS author, SUM(s.total_amount) AS total_sales
+    FROM authors a
+    JOIN books b ON a.author_id = b.author_id
+    JOIN sales s ON b.book_id = s.book_id
+    WHERE a.name = name
+    GROUP BY a.name;
+end
+exec GetTotalSalesByAuthor @name='J.K. Rowling';
+
+```
+
+![alt text](image-120.png)
+
+```sql
+--Task 2: Function to Calculate Total Quantity Sold for a Book
+--Create a function to calculate the total quantity sold for a given book title and write a query to use this function for '1984'.
+```
+
+```sql
+--Task 3: View for Best-Selling Books
+--Create a view to show the best-selling books (those with total sales amount above $30) and write a query to select from this view. for above tables
+
+CREATE VIEW BestSellingBooks
+AS
+SELECT b.book_id, b.title, b.author_id, b.genre, b.price,
+SUM(s.total_amount) AS total_sales_amount
+FROM books b
+JOIN sales s ON b.book_id = s.book_id
+GROUP BY b.book_id, b.title, b.author_id, b.genre, b.price
+HAVING SUM(s.total_amount) > 30;
+
+SELECT * FROM BestSellingBooks;
+
+```
+
+![alt text](image-121.png)
+
+```sql
+--Task 4: Stored Procedure for Average Book Price by Author
+--Create a stored procedure to get the average price of books for a specific author and write a query to call the procedure for 'Mark Twain'. for above given table
+CREATE PROCEDURE GetAverageBookPriceByAuthor( @name VARCHAR(50))
+as
+BEGIN
+    SELECT a.name AS author, AVG(b.price) AS average_price
+    FROM authors a
+    JOIN books b ON a.author_id = b.author_id
+    WHERE a.name = name
+    GROUP BY a.name;
+END
+
+exec GetAverageBookPriceByAuthor
+@name='Mark Twain';
+```
+
+![alt text](image-122.png)
+
+```sql
+--Task 5: Function to Calculate Total Sales in a Month
+--Create a function to calculate the total sales amount in a given month and year, and write a query to use this function for January 2024.
+
+```
+
+```sql
+--Task 6
+--Task 6: View for Authors with Multiple Genres
+--Create a view to show authors who have written books in multiple genres and write a query to select from this view.
+CREATE VIEW Authors_MultipleGenres
+AS
+SELECT a.author_id,a.name AS author_name,
+    COUNT(DISTINCT b.genre) AS num_genres
+FROM authors a
+JOIN books b ON a.author_id = b.author_id
+GROUP BY a.author_id, a.name
+HAVING COUNT(DISTINCT b.genre) > 1;
+
+	SELECT *FROM Authors_MultipleGenres;
+
+```
+
+![alt text](image-123.png)
+
+```sql
+--Task 7: Ranking Authors by Total Sales
+--Write a query to rank authors by their total sales amount and display the top 3 authors.
+SELECT top(3) a.author_id, a.name AS author_name,
+        SUM(s.total_amount) AS total_sales_amount,
+        RANK() OVER (ORDER BY SUM(s.total_amount) DESC) AS sales_rank
+    FROM authors a
+    JOIN books b ON a.author_id = b.author_id
+    JOIN sales s ON b.book_id = s.book_id
+    GROUP BY a.author_id, a.name
+
+
+
+
+```
+
+![alt text](image-124.png)
+
+```sql
+--Task 8: Stored Procedure for Top-Selling Book in a Genre
+--Create a stored procedure to get the top-selling book in a specific genre and write a query to call the procedure for 'Fantasy'.
+CREATE PROCEDURE GetTopSellingBookInGenre(@genre VARCHAR(50))
+as
+BEGIN
+    SELECT top(1)
+        b.title,
+        SUM(s.total_amount) AS total_sales
+    FROM
+        books b
+    JOIN
+        sales s ON b.book_id = s.book_id
+    WHERE
+        b.genre = genre
+    GROUP BY
+        b.title
+    ORDER BY
+        total_sales DESC
+ENd
+
+exec GetTopSellingBookInGenre  @genre='Fantasy'
+
+```
+
+![alt text](image-125.png)
+
+```sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
 ### Section 5: Questions for Running Total and Running Average with OVER Clause
 
 ```sql
@@ -296,7 +466,6 @@ begin
 
 end
  go
-
 
  delete from sales where sale_id=6
  Select * from sales_log
