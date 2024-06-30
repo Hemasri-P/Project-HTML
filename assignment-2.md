@@ -81,7 +81,7 @@ group by  sales.book_id ,title ,genre  ,sales.total_amount
 ![alt text](image-106.png)
 
 ```sql
---Write a query to find the average price of books for each author and group the results by author name, only including authors whose average book price is higher than the overall average book price.
+--3-Write a query to find the average price of books for each author and group the results by author name, only including authors whose average book price is higher than the overall average book price.
 with cte_prices
 as (
  select authors.name, books.title , avg(price) as AvgPrice from books
@@ -223,6 +223,20 @@ exec GetTotalSalesByAuthor @name='J.K. Rowling';
 ```sql
 --Task 2: Function to Calculate Total Quantity Sold for a Book
 --Create a function to calculate the total quantity sold for a given book title and write a query to use this function for '1984'.
+
+CREATE FUNCTION GetTotalQuantitySold(@bookTitle VARCHAR(200))
+RETURNS INT
+as
+BEGIN
+    DECLARE totalQuantity int;
+
+    SELECT SUM(s.quantity) as totalQuantity
+    FROM books b
+    JOIN sales s ON b.book_id = s.book_id
+    WHERE b.title = title;
+
+    RETURN totalQuantity;
+END
 ```
 
 ```sql
@@ -266,8 +280,21 @@ exec GetAverageBookPriceByAuthor
 ```sql
 --Task 5: Function to Calculate Total Sales in a Month
 --Create a function to calculate the total sales amount in a given month and year, and write a query to use this function for January 2024.
+create function dbo.CalTotalSale(@month varchar(max))returns int
+as
+begin
+declare @totalSales int
+set @totalSales = (select sum(total_amount) as totalSales   from sales
+  group by format(sale_date,'MM-yyyy')
+    having format(sale_date,'MM-yyyy') =@month)
+	return @totalSales
+	end
+	go
+	select dbo.CalTotalSale('01-2024')
 
 ```
+
+![alt text](image-140.png)
 
 ```sql
 --Task 6
@@ -298,9 +325,6 @@ SELECT top(3) a.author_id, a.name AS author_name,
     JOIN books b ON a.author_id = b.author_id
     JOIN sales s ON b.book_id = s.book_id
     GROUP BY a.author_id, a.name
-
-
-
 
 ```
 
@@ -333,12 +357,51 @@ exec GetTopSellingBookInGenre  @genre='Fantasy'
 
 ![alt text](image-125.png)
 
+```sql
+--Task 9: Function to Calculate Average Sales Per Genre
+--Create a function to calculate the average sales amount for books in a given genre and write a query to use this function for 'Romance'.
+
+create function dbo.CalAvgSalesPerGenre(@genre varchar(max))
+returns int
+as
+begin
+return (select avg(total_amount) from sales
+where book_id in (select book_id from books
+  where genre=@genre))end
+  go
+  select dbo.CalAvgSalesPerGenre('Romance')
+
+```
+
+![alt text](image-141.png)
+
 ### Section 3: Stored Procedures with Transactions and Validations
 
 ```sql
 --1 Add New Book and Update Author's Average Price
 
 --Create a stored procedure that adds a new book and updates the average price of books for the author. Ensure the price is positive, use transactions to ensure data integrity, and return the new average price.Delete Book and Update Author's Total Sales
+create procedure AddingBook
+@book_id
+int,@title varchar(max),@author_id int,@genre varchar(max),@price decimal(5,2)
+	as
+	begin
+	begin transaction;
+  BEGIN TRY
+  if not exists (select * from authors where author_id=@author_id)
+  throw 50000,'author not there',1;
+  insert into books values  (@book_id ,@title, @author_id, @genre, @price);
+  commit transaction;
+   select avg(price) as averagePrice from books where author_id=@author_id;
+  end try
+  begin catch
+  rollback transaction;
+ end
+ catch
+ end
+ go
+ exec AddingBook @book_id =6,@title ='wild life',@author_id= 3,@genre ='documentary',@price =100
+ select * from books
 ```
 
 ```sql
@@ -427,7 +490,7 @@ create procedure sp_Addsales@sale_id int,@book_id int ,@sale_date date ,@quantit
 ![alt text](image-128.png)
 
 ```sql
---task 5:Update Book Price and Recalculate Author's Average Price
+--Task 5:Update Book Price and Recalculate Author's Average Price
 --Create a stored procedure that updates the price of a book and recalculates the average price of books for the author. Ensure the price is positive, use transactions to ensure data integrity, and return the new average price.
 create procedure sp_UpdateBookPrice
 @book_id int,@price decimal(5,2)
@@ -532,7 +595,9 @@ create nonclustered index ix_bookid on sales([book_id])
 ![alt text](image-134.png)
 
 ```sql
---6.
+--6.Export Data as XML
+--Write a query to export the authors and their books as XML.
+
 select a.author_id,a.name,a.country,a.birth_year,
 (select b.book_id,b.title,b.genre,b.price from books b where b.author_id=a.author_id
 for XML PATH('book'), type
@@ -797,6 +862,20 @@ end
 ```sql
 --3 .Trigger to Prevent Negative Quantity on Update
 --Create a trigger that prevents updates to the sales table if the new quantity is negative.
-
+create TRIGGER before_update_sales
+ on sales
+instead of update
+as
+begin
+if exists (select 1 from inserted where quantity<0)begin   raiserror('quantity not valid',16,1);
+   return;
+   rollback
+   end;end;
+ update sales
+ set quantity=0
+ where sale_id=7
+ select * from sales
 
 ```
+
+![alt text](image-143.png)
