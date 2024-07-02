@@ -1553,9 +1553,10 @@ EXEC sp_xml_removedocument @xmlDoc;
   ![alt text](image-97.png)
   ![alt text](image-98.png)
 - EC2 : ELASTIC CLOUD COMPUTE [WE can able to add RAM or remove RAM anytime ]
+- have 2 types of IP {static , Dynamic}
 - S3: Simple storage service [ stores files have large data like pics ,videos , csv file , loges etc]
 - Dynamo DB : orders , account data , Credentials
-- EBS [Enterprise Business System ]: operating system , less storage , faster , stores source code.
+- EBS [Enterprise Business System ]: operating system , less storage , faster , stores software to run source code.
 
 ### AWS infrastructure ans services
 
@@ -1577,3 +1578,17 @@ EXEC sp_xml_removedocument @xmlDoc;
   - Groups
   - Roles (works on trust bases)
   - Policies ( way to enforce the roles)
+
+### Monday -- 2/07/2024
+
+Exam on Sql
+
+### Tuesday - 3/07/2024
+
+![alt text](image-145.png)
+
+- How to get profile pic from db :
+  ![alt text](image-146.png)
+- Hosting : providing their place to others
+  ![alt text](image-147.png)
+  -App Server : It automatically restarts the application when ever more requests are coming
