@@ -1591,4 +1591,6 @@ Exam on Sql
   ![alt text](image-146.png)
 - Hosting : providing their place to others
   ![alt text](image-147.png)
-  -App Server : It automatically restarts the application when ever more requests are coming
+  -App Server : It automatically restarts the application when ever more requests are coming.
+  - Example : Apache Tomcat
+- Webserver : Static files need webserver ,to manage the load, Allows the users to aceess directly.
