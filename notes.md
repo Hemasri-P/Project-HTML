@@ -1585,12 +1585,14 @@ Exam on Sql
 
 ### Tuesday - 3/07/2024
 
-![alt text](image-145.png)
-
+- Ec2
+  ![alt text](image-145.png)
 - How to get profile pic from db :
   ![alt text](image-146.png)
 - Hosting : providing their place to others
   ![alt text](image-147.png)
-  -App Server : It automatically restarts the application when ever more requests are coming.
+- App Server : It automatically restarts the application when ever more requests are coming.
   - Example : Apache Tomcat
 - Webserver : Static files need webserver ,to manage the load, Allows the users to aceess directly.
+- S3 bucket : Hosting the website
+- Cold Start :system it self is not on.
