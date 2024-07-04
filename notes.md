@@ -1596,3 +1596,5 @@ Exam on Sql
 - Webserver : Static files need webserver ,to manage the load, Allows the users to aceess directly.
 - S3 bucket : Hosting the website
 - Cold Start :system it self is not on.
+
+### Wednesday - 4/07/2024
